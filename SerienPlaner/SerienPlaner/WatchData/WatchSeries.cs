@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Serialization;
 using SerienPlaner.Json;
 using SerienPlaner.OMDBwrapper;
@@ -14,38 +15,73 @@ namespace SerienPlaner.WatchData
         [XmlAttribute(AttributeName = "Title")]
         public string Title { get; set; }
 
-        public static WatchSeries Create(OmdbResult omdbResult)
+        public WatchSeries()
         {
-            return new WatchSeries()
-            {
-                IMDBID = omdbResult.imdbID,
-                Title = omdbResult.Title,
-                Seasons = FindSeasons(omdbResult.imdbID, Int32.Parse(omdbResult.totalSeasons))
-            };
+            
         }
 
-        private static List<WatchEpisode> FindEpisodes(string imdbId, int season)
+        public WatchSeries(OmdbResult omdbResult)
+        {
+            IMDBID = omdbResult.imdbID;
+            Title = omdbResult.Title;
+            Seasons = FindSeasons(omdbResult.imdbID, Int32.Parse(omdbResult.totalSeasons));
+        }
+
+        private List<WatchEpisode> FindEpisodes(string imdbId, int season,List<WatchEpisode> EpisodeList)
         {
             OmdbConnection con = new OmdbConnection();
             OmdbResult episoderesult = new OmdbResult();
             episoderesult = con.GetResult(new OmdbRequestBuilder(imdbId, season, PlotType.Full));
-            List<WatchEpisode> EpisodeList = new List<WatchEpisode>();
-            episoderesult.Episodes.ForEach(x => EpisodeList.Add(new WatchEpisode() { IMDBID = x.imdbID, EpisodeName = x.Title, EpisodeId = Int32.Parse(x.Episode) }));
-            return EpisodeList;
+            if (EpisodeList == null)
+            {
+                EpisodeList = new List<WatchEpisode>();
+            }
+            episoderesult.Episodes.ForEach(x =>
+            {
+                if (EpisodeList.Any(y => y.IMDBID == x.imdbID))
+                    return;
+                EpisodeList.Add(new WatchEpisode()
+                {
+                    IMDBID = x.imdbID,
+                    EpisodeName = x.Title,
+                    EpisodeId = Int32.Parse(x.Episode)
+                });
+            });
+            return EpisodeList.OrderBy(x=> x.EpisodeId).ToList();
         }
 
-        private static List<WatchSeason> FindSeasons(string imdbId, int seasons)
+        private List<WatchSeason> FindSeasons(string imdbId, int seasons)
         {
             List<WatchSeason> seasonlist = new List<WatchSeason>();
+            if (Seasons != null)
+            {
+                seasonlist = Seasons;
+            }
+            
             for (int i = 0; i < seasons; i++)
             {
-                seasonlist.Add(new WatchSeason()
+                if (seasonlist.Any(x => x.SeasonId == i + 1))
                 {
-                    SeasonId = i + 1,
-                    Episodes = FindEpisodes(imdbId, i + 1)
-                });
+                    WatchSeason foundseason = seasonlist.First(x => x.SeasonId == i + 1);
+                    foundseason.Episodes = FindEpisodes(imdbId, i + 1, foundseason.Episodes);
+                }
+                else
+                {
+                    seasonlist.Add(new WatchSeason()
+                    {
+                        SeasonId = i + 1,
+                        Episodes = FindEpisodes(imdbId, i + 1,null)
+                    });
+                }
             }
-            return seasonlist;
+            return seasonlist.OrderBy(x=> x.SeasonId).ToList();
+        }
+
+        public void Update()
+        {
+            var con = new OmdbConnection();
+            OmdbResult omdbResult = con.GetResult(new OmdbRequestBuilder(Title, RequestBy.Title, PlotType.Full));
+            Seasons = FindSeasons(omdbResult.imdbID, Int32.Parse(omdbResult.totalSeasons));
         }
     }
 

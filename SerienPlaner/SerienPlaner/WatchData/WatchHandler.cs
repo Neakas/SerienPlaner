@@ -45,11 +45,18 @@ namespace SerienPlaner.WatchData
                 };
                 xmlFile = new FileInfo(Path.Combine(appdir.FullName, "UserData.xml"));
             }
+            UpdateWatch();
+        }
+
+        private void UpdateWatch()
+        {
+            WatchXml.Series.ForEach(x=> x.Update());
+            WatchXml.SerializeToFile(xmlFile.FullName);
         }
 
         public void AddWatch( OmdbResult sender )
         {
-            WatchXml.Series.Add(WatchSeries.Create(sender));
+            WatchXml.Series.Add(new WatchSeries(sender));
             WatchXml.SerializeToFile(xmlFile.FullName);
         }
     }
