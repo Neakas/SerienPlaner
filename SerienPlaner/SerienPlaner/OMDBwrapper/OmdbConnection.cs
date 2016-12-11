@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using System.Web.Script.Serialization;
+using System.Xml.Serialization;
+using SerienPlaner.Json;
 
 namespace SerienPlaner.OMDBwrapper
 {
@@ -26,14 +28,46 @@ namespace SerienPlaner.OMDBwrapper
         Episode
     }
 
-    public class OMDBConnection
+    public enum RequestBy
     {
-        public async Task<string> GetResult(OMDBSearchBuilder builder)
+        ImdbId,
+        Title,
+        Search
+    }
+
+    public class OmdbConnection
+    {
+        public OmdbResult GetResult(OmdbRequestBuilder builder)
         {
-            string Url = "http://www.omdbapi.com/?";
-            using (WebClient wc = new WebClient())
+            const string url = "http://www.omdbapi.com/?";
+            var uri = new Uri(url + builder.RequestString);
+
+            WebRequest request = null;
+            WebResponse response = null;
+            try
             {
-                return wc.DownloadString(Url + builder.RequestString);
+                request = WebRequest.Create(uri);
+                try
+                {
+                    response = request.GetResponse();
+                }
+                catch
+                {
+                    return null;
+                }
+                JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                using (var stream = response.GetResponseStream())
+                {
+                    var reader = new StreamReader(stream, Encoding.UTF8);
+                    var json = reader.ReadToEnd();
+                    json = json.Replace(@"\", "");
+                    return jsonSerializer.Deserialize<Json.OmdbResult>(json);
+                }
+            }
+            finally
+            {
+                response?.Close();
+                request?.Abort();
             }
         }
     }

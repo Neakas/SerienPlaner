@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SerienPlaner.OMDBwrapper
 {
-
-    public class OMDBRequestBuilder
+    public class OmdbRequestBuilder
     {
         private int _imdbId;
 
@@ -21,13 +15,9 @@ namespace SerienPlaner.OMDBwrapper
                 RequestString += "&i=" + value;
             }
         }
-        private string _searchstring;
 
-        public string Searchstring
-        {
-            get { return _searchstring; }
-            set { _searchstring = value; }
-        }
+        private string Searchstring { get; set; }
+
         private TypeOfSearch _typeOfSearch;
 
         public TypeOfSearch TypeOfSearch
@@ -51,14 +41,14 @@ namespace SerienPlaner.OMDBwrapper
             }
         }
 
-        private PlotType plotType;
+        private PlotType _plotType;
 
         public PlotType PlotType
         {
-            get { return plotType; }
+            get { return _plotType; }
             set
             {
-                plotType = value;
+                _plotType = value;
                 RequestString += "&plot=" + (value == PlotType.Full ? "full" : "short");
             }
         }
@@ -100,9 +90,42 @@ namespace SerienPlaner.OMDBwrapper
         }
 
         public string RequestString { get; set; }
-        public OMDBRequestBuilder(string searchstring,PlotType plotType = PlotType.Short, TypeOfSearch typeOfSearch = TypeOfSearch.Series,ReturnType returnformat = ReturnType.Xml)
+        public OmdbRequestBuilder(string search,RequestBy requestBy,PlotType plotType = PlotType.Short, TypeOfSearch typeOfSearch = TypeOfSearch.Series,ReturnType returnformat = ReturnType.Json)
         {
-            RequestString = "t=" + searchstring;
+            switch (requestBy)
+            {
+                case RequestBy.ImdbId:
+                    RequestString = "i=" + search;
+                    break;
+                case RequestBy.Title:
+                    RequestString = "t=" + search;
+                    break;
+                case RequestBy.Search:
+                    RequestString = "s=" + search;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(requestBy), requestBy, null);
+            }
+            
+            PlotType = plotType;
+            TypeOfSearch = typeOfSearch;
+            ReturnFormat = returnformat;
+        }
+
+        public OmdbRequestBuilder(string search, int season, PlotType plotType = PlotType.Short, TypeOfSearch typeOfSearch = TypeOfSearch.Series, ReturnType returnformat = ReturnType.Json)
+        {
+            RequestString = "i=" + search;
+            Season = season;
+            PlotType = plotType;
+            TypeOfSearch = typeOfSearch;
+            ReturnFormat = returnformat;
+        }
+
+        public OmdbRequestBuilder(string search, int season,int episode, PlotType plotType = PlotType.Short, TypeOfSearch typeOfSearch = TypeOfSearch.Series, ReturnType returnformat = ReturnType.Json)
+        {
+            RequestString = "i=" + search;
+            Season = season;
+            Episode = episode;
             PlotType = plotType;
             TypeOfSearch = typeOfSearch;
             ReturnFormat = returnformat;

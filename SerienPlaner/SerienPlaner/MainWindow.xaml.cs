@@ -1,75 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml.Serialization;
 using SerienPlaner.OMDBwrapper;
-using SerienPlaner.XML;
-using UIControls;
+using dragonz.actb.core;
+using NeaUtils.Extensions.XmlExtensions;
+using SerienPlaner.Json;
+using SerienPlaner.WatchData;
 
 namespace SerienPlaner
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
+        private AutoCompleteManager _acmOmdb;
+        private WatchHandler watchHandler;
         public MainWindow()
         {
             InitializeComponent();
-            List<string> sections = new List<string> {"Author",
-                               "Title", "Comment"};
-            tbSearch.SectionsList = sections;
+            watchHandler = new WatchHandler();
+            InitControls();
         }
 
-        private void tbSearch_KeyDown(object sender, KeyEventArgs e)
+        private void InitControls()
         {
-            if (e.Key == Key.Return)
+            _acmOmdb = new AutoCompleteManager(tbSearch)
             {
-                var con = new OMDBConnection();
-                OMDBRequestBuilder request = new OMDBRequestBuilder(tbSearch.Text,PlotType.Full);
-                OMDBSearchBuilder searchrequest = new OMDBSearchBuilder(tbSearch.Text);
-                request.Season = 1;
-                //request.Episode = 1;
-
-                var result = con.GetResult(searchrequest).Result.Replace("\\","");
-
-                Root root = ReadXml(result);
-                //tbResult.Text = "Title: " + root.Title + " Season: " + root.Season + Environment.NewLine;
-                //root.Result.ForEach(x=> tbResult.Text += "Episode: " + x.Episode + " Title: " + x.Title + Environment.NewLine);
-            }
+                DataProvider = new OmdbSuggestionProvider(),
+                Asynchronous = true
+            };
+            tbSearch.KeyDown += tbSearch_KeyDown;
         }
 
-        private Root ReadXml(string xmlstring)
+        private void tbSearch_KeyDown( object sender, KeyEventArgs e )
         {
-            var xmlSerializer = new XmlSerializer(typeof(Root));
-            Root result;
-
-            using (TextReader reader = new StringReader(xmlstring))
+            if (e.Key != Key.Enter)
             {
-                result = (Root)xmlSerializer.Deserialize(reader);
+                return;
             }
-            return result;
+            var result = ( (OmdbResult) _acmOmdb.DataProvider.ResultObject ).Search.First(x => ( (TextBox) sender ).Text == x.Title);
+            var con = new OmdbConnection();
+            var root = con.GetResult(new OmdbRequestBuilder(result.Title, RequestBy.Title,PlotType.Full));
+            var fullFilePath = root.Poster;
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+            bitmap.EndInit();
+            seriesControl.OmdbResultObj = root;
+            seriesControl.imgPoster.Source = bitmap;
         }
 
-        private void TbSearch_OnOnSearch(object sender, RoutedEventArgs e)
+        private void SeriesControl_OnWatchClicked( object sender, RoutedEventArgs e )
         {
-            SearchEventArgs searchArgs = e as SearchEventArgs;
+            watchHandler.AddWatch((OmdbResult)sender);
         }
-
     }
 }
