@@ -6,11 +6,50 @@
         xmlns:local="clr-namespace:SerienPlaner"
         xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:Controls="clr-namespace:SerienPlaner.Controls" x:Class="SerienPlaner.MainWindow"
+        xmlns:Controls="clr-namespace:SerienPlaner.Controls"
+        xmlns:watchData="clr-namespace:SerienPlaner.WatchData"
+        x:Class="SerienPlaner.MainWindow"
         mc:Ignorable="d"
         Title="Watchlist" Height="465.957" Width="838.83"  BorderThickness="0" GlowBrush="Black"
-                      ResizeMode="CanResizeWithGrip" Background="#FF282828"  OverrideDefaultWindowCommandsBrush="White"  >
+                      ResizeMode="CanResizeWithGrip" Background="#FF282828"  OverrideDefaultWindowCommandsBrush="White">
+
     <controls:MetroWindow.Resources>
+        <local:StringToBoolConverter x:Key="StringToBoolConverter"></local:StringToBoolConverter>
+        <ContextMenu x:Key="cmseries">
+            <MenuItem Header="Delete" Click="OnSeriesDelete"></MenuItem>
+        </ContextMenu>
+        <XmlDataProvider x:Key="xmldata" Source="UserData.xml" XPath="/Watch/Series" />
+        <!--Series Header-->
+        <HierarchicalDataTemplate DataType="Series" ItemsSource="{Binding XPath=./*}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="0" Text="Series" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <!--Serien Leaf -->
+        <HierarchicalDataTemplate DataType="WatchSeries" ItemsSource="{Binding XPath=./Seasons/*}">
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Margin="5,0,0,0" Text="{Binding XPath=@Title}" ContextMenu="{StaticResource cmseries}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <!--Season Leaf -->
+        <HierarchicalDataTemplate DataType="WatchSeason"  ItemsSource="{Binding XPath=./Episodes/*}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Margin="0,0,0,0" Checked="SeasonCheckChanged" Unchecked="SeasonCheckChanged"  IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}"></CheckBox>
+                <TextBlock Margin="0" Text="Season " />
+                <TextBlock Margin="0,0,0,0" Text="{Binding XPath=@SeasonId}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <!--Episode Leaf -->
+        <HierarchicalDataTemplate DataType="WatchEpisode">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Margin="0,0,0,0" Checked="EpisodeCheckChanged" Unchecked="EpisodeCheckChanged"  IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}"></CheckBox>
+                <TextBlock Margin="0" Text="Episode " />
+                <TextBlock Margin="0,0,0,0" Text="{Binding XPath=@EpisodeId}" />
+                <TextBlock Margin="4,0,0,0" Text="{Binding XPath=@EpisodeName}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+
         <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
             <GradientStop Color="#ABADB3" Offset="0.05"/>
             <GradientStop Color="#E2E3EA" Offset="0.07"/>
@@ -64,23 +103,31 @@
     <controls:MetroWindow.IconEdgeMode>
         <EdgeMode>Aliased</EdgeMode>
     </controls:MetroWindow.IconEdgeMode>
-    <Grid>
+
+    <Grid Name="MainGrid" DataContext="{StaticResource xmldata}">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="Row1" Height="27"/>
             <RowDefinition x:Name="Row2" Height="292*"  />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="Col1" MinWidth="100" Width="100*"/>
-            <ColumnDefinition x:Name="Col2" Width="417*"/>
+            <!--<ColumnDefinition x:Name="Col1" MinWidth="100" Width="100*"/>
+            <ColumnDefinition x:Name="Col2" Width="417*"/>-->
+            <ColumnDefinition Width="100*" MinWidth="100" />
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="306*" />
         </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Background="#CCA20025" />
+
         <Label x:Name="label" Grid.Row="0" Grid.Column="0" Content="My Watch" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center"/>
-        <TreeView Grid.Column="0"  x:Name="treeView" Margin="0,0,0,10" Grid.Row="1"/>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" Grid.Row="0">
+        <TreeView Grid.Column="0"  x:Name="treeView" Margin="0,0,0,10" Grid.Row="1" ItemsSource="{Binding}"
+                  VirtualizingStackPanel.IsVirtualizing="False"
+                  VirtualizingStackPanel.VirtualizationMode="Standard" SelectedItemChanged="TreeView_OnSelectedItemChanged" />
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" Grid.Row="0" >
             <Grid>
                 <Label Content="Search:" HorizontalAlignment="Left" Width="49" />
                 <TextBox VerticalAlignment="Center" Height="26" Style="{DynamicResource TextBoxStyle1}" Background="#FFC9C9C9" x:Name="tbSearch" TabIndex="0" Margin="49,0,0,-1"/>
             </Grid>
         </Border>
-        <Controls:Series x:Name="seriesControl" Grid.Column="1" Grid.Row="1" WatchClicked="SeriesControl_OnWatchClicked"/>
+        <Controls:Series x:Name="seriesControl" Grid.Column="2" Grid.Row="1" WatchClicked="SeriesControl_OnWatchClicked"/>
     </Grid>
 </controls:MetroWindow>

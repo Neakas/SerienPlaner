@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using NeaUtils.Extensions.XmlExtensions;
 using SerienPlaner.Json;
 
@@ -12,7 +13,7 @@ namespace SerienPlaner.WatchData
     public class WatchHandler
     {
         private Watch _watchxml;
-        private FileInfo xmlFile;
+        public FileInfo xmlFile;
 
         public Watch WatchXml
         {
@@ -51,12 +52,20 @@ namespace SerienPlaner.WatchData
         private void UpdateWatch()
         {
             WatchXml.Series.ForEach(x=> x.Update());
+            var data = (XmlDataProvider) MainWindow.CurrentInstance.XdataProvider;
             WatchXml.SerializeToFile(xmlFile.FullName);
         }
 
         public void AddWatch( OmdbResult sender )
         {
             WatchXml.Series.Add(new WatchSeries(sender));
+            WatchXml.SerializeToFile(xmlFile.FullName);
+        }
+
+        public void RemoveWatch(string IMDBID)
+        {
+            WatchSeries delseries = WatchXml.Series.Where(x => x.IMDBID == IMDBID).First();
+            WatchXml.Series.Remove(delseries);
             WatchXml.SerializeToFile(xmlFile.FullName);
         }
     }

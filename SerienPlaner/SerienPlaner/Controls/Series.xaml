@@ -37,6 +37,7 @@
                 <local:DoubleLabel LabelContent="Imdb-Vores: " TextContent="{Binding Path = OmdbResultObj.imdbRating, Mode=TwoWay, ElementName=userControl, UpdateSourceTrigger=PropertyChanged}"/>
                 <local:DoubleLabel LabelContent="Imdb-Rating: " TextContent="{Binding Path = OmdbResultObj.imdbVotes, Mode=TwoWay, ElementName=userControl, UpdateSourceTrigger=PropertyChanged}"/>
                 <local:DoubleLabel LabelContent="Total Seasons: " TextContent="{Binding Path = OmdbResultObj.totalSeasons, Mode=TwoWay, ElementName=userControl, UpdateSourceTrigger=PropertyChanged}"/>
+                <local:DoubleLabel LabelContent="Plot: " TextContent="{Binding Path = OmdbResultObj.Plot, Mode=TwoWay, ElementName=userControl, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </Grid>
         <Border CornerRadius="3" BorderBrush="#CCA20025" UseLayoutRounding="True" BorderThickness="4,0,0,4" Grid.Column="2" Grid.Row="0"  VerticalAlignment="Top" Margin="0.173,0,-0.049,0">

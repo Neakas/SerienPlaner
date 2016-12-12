@@ -37,10 +37,11 @@ namespace SerienPlaner.OMDBwrapper
 
     public class OmdbConnection
     {
+        private const string Baseurl = "http://www.omdbapi.com/?";
+
         public OmdbResult GetResult(OmdbRequestBuilder builder)
         {
-            const string url = "http://www.omdbapi.com/?";
-            var uri = new Uri(url + builder.RequestString);
+            var uri = new Uri(Baseurl + builder.RequestString);
 
             WebRequest request = null;
             WebResponse response = null;
@@ -55,13 +56,16 @@ namespace SerienPlaner.OMDBwrapper
                 {
                     return null;
                 }
-                JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+                var jsonSerializer = new JavaScriptSerializer();
                 using (var stream = response.GetResponseStream())
                 {
-                    var reader = new StreamReader(stream, Encoding.UTF8);
-                    var json = reader.ReadToEnd();
-                    json = json.Replace(@"\", "");
-                    return jsonSerializer.Deserialize<Json.OmdbResult>(json);
+                    if (stream != null)
+                    {
+                        var reader = new StreamReader(stream, Encoding.UTF8);
+                        var json = reader.ReadToEnd();
+                        return jsonSerializer.Deserialize<Json.OmdbResult>(json);
+                    }
+                    return null;
                 }
             }
             finally
