@@ -181,6 +181,7 @@ namespace SerienPlaner
             AddItemWindow aiw = new AddItemWindow("Add Series");
             aiw.ShowDialog();
             _watchHandler.AddWatch(aiw.InputValue);
+            _watchHandler.Save();
             XdataProvider.Refresh();
         }
 
