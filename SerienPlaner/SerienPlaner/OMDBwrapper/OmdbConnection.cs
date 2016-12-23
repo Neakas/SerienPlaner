@@ -2,9 +2,7 @@
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Web;
 using System.Web.Script.Serialization;
-using System.Xml.Serialization;
 using SerienPlaner.Json;
 
 namespace SerienPlaner.OMDBwrapper
@@ -48,24 +46,22 @@ namespace SerienPlaner.OMDBwrapper
             try
             {
                 request = WebRequest.Create(uri);
+                request.Timeout = 1000;
                 try
                 {
                     response = request.GetResponse();
                 }
-                catch
+                catch(Exception)
                 {
                     return null;
                 }
                 var jsonSerializer = new JavaScriptSerializer();
                 using (var stream = response.GetResponseStream())
                 {
-                    if (stream != null)
-                    {
-                        var reader = new StreamReader(stream, Encoding.UTF8);
-                        var json = reader.ReadToEnd();
-                        return jsonSerializer.Deserialize<Json.OmdbResult>(json);
-                    }
-                    return null;
+                    if (stream == null) return null;
+                    var reader = new StreamReader(stream, Encoding.UTF8);
+                    var json = reader.ReadToEnd();
+                    return jsonSerializer.Deserialize<OmdbResult>(json);
                 }
             }
             finally

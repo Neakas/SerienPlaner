@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 
 namespace SerienPlaner.WatchData
@@ -10,8 +7,8 @@ namespace SerienPlaner.WatchData
     [XmlRoot(ElementName = "Watch")]
     public class Watch
     {
-        [XmlAttribute(AttributeName = "IMDBID")]
-        public string IMDBID { get; set; }
+        [XmlAttribute(AttributeName = "Imdbid")]
+        public string Imdbid { get; set; }
         public List<WatchSeries> Series { get; set; }
     }
 }

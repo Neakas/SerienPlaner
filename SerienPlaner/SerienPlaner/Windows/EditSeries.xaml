@@ -1,0 +1,53 @@
+﻿<controls:MetroWindow x:Class="SerienPlaner.Windows.EditSeries"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SerienPlaner.Windows"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        x:Name="EditWindow"
+        mc:Ignorable="d"
+        Title="EditSeries" Height="320.69" Width="530.074" Background="#FF282828" BorderThickness="2" GlowBrush="#CCA20025">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="255*"/>
+            <ColumnDefinition Width="263*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="1,1,1,1">
+            <Grid>
+                <ListBox  x:Name="lbSeasons" ItemsSource="{Binding Path=Series.Seasons, ElementName=EditWindow}" BorderBrush="LightGray" BorderThickness="1" Margin="10,36,40,10" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                            <Run Text="Season" />
+                            <Run Text="{Binding SeasonId}" />
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label  x:Name="label"  Content="Seasons" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button IsEnabled="True" x:Name="btAddSeason"  Content="+" Click="BtAddSeason_OnClick"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Margin="0,36,10,0" Height="21" HorizontalAlignment="Right" Width="25"/>
+                <Button IsEnabled="False" x:Name="btRemoveSeason"  Content="-"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Margin="0,66,10,0" Height="21" HorizontalAlignment="Right" Width="25"/>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="0,1,1,1" >
+            <Grid>
+                <ListBox x:Name="lbEpisodes" ItemsSource="{Binding SelectedItem.Episodes, ElementName=lbSeasons}" BorderBrush="LightGray" BorderThickness="1" Margin="10,36,41,10">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Text="Episode " />
+                                <TextBlock VerticalAlignment="Center" Text="{Binding EpisodeId}" />
+                                <TextBlock VerticalAlignment="Center" Text=":" />
+                                <TextBox Text="{Binding EpisodeName}" VerticalContentAlignment="Center" BorderBrush="Transparent" Background="Transparent" IsManipulationEnabled="False" MouseDoubleClick="Control_OnMouseDoubleClick" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label   x:Name="label1"  Content="Episodes" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <Button IsEnabled="False"  x:Name="btAddEpisodes" Click="BtAddEpisodes_OnClick"  Content="+"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,36,10,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="26"/>
+                <Button IsEnabled="False"  x:Name="btRemoveEpisodes"  Content="-"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,66,10,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="26"/>
+            </Grid>
+        </Border>
+    </Grid>
+</controls:MetroWindow>

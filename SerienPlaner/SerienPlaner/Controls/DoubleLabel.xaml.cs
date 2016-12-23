@@ -13,13 +13,13 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SerienPlaner.Controls
+namespace SerienPlaner
 {
     /// <summary>
     /// Interaction logic for DoubleLabel.xaml
     /// </summary>
     public partial class DoubleLabel : UserControl
-    { 
+    {
 
         public DoubleLabel()
         {

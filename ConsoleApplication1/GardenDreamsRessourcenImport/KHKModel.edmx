@@ -1,0 +1,1346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OLKHKEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="amxImportRL">
+          <Key>
+            <PropertyRef Name="ArtikelnummerNeu" />
+          </Key>
+          <Property Name="Typ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ArtikelnummerNeu" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Artikelnummer" Type="nvarchar" MaxLength="255" />
+          <Property Name="Matchcode" Type="nvarchar" MaxLength="255" />
+          <Property Name="M1" Type="nvarchar" MaxLength="255" />
+          <Property Name="A1" Type="float" />
+          <Property Name="M2" Type="nvarchar" MaxLength="255" />
+          <Property Name="A2" Type="float" />
+          <Property Name="M3" Type="nvarchar" MaxLength="255" />
+          <Property Name="A3" Type="float" />
+          <Property Name="M4" Type="nvarchar" MaxLength="255" />
+          <Property Name="A4" Type="float" />
+          <Property Name="M5" Type="nvarchar" MaxLength="255" />
+          <Property Name="A5" Type="float" />
+          <Property Name="M6" Type="nvarchar" MaxLength="255" />
+          <Property Name="A6" Type="float" />
+          <Property Name="M7" Type="nvarchar" MaxLength="255" />
+          <Property Name="A7" Type="float" />
+          <Property Name="M8" Type="nvarchar" MaxLength="255" />
+          <Property Name="A8" Type="float" />
+          <Property Name="M9" Type="nvarchar" MaxLength="255" />
+          <Property Name="A9" Type="float" />
+          <Property Name="M10" Type="nvarchar" MaxLength="255" />
+          <Property Name="A10" Type="float" />
+          <Property Name="M11" Type="nvarchar" MaxLength="255" />
+          <Property Name="A11" Type="float" />
+          <Property Name="M12" Type="nvarchar" MaxLength="255" />
+          <Property Name="A12" Type="float" />
+          <Property Name="M13" Type="nvarchar" MaxLength="255" />
+          <Property Name="A13" Type="float" />
+          <Property Name="M14" Type="nvarchar" MaxLength="255" />
+          <Property Name="A14" Type="float" />
+          <Property Name="M15" Type="nvarchar" MaxLength="255" />
+          <Property Name="A15" Type="float" />
+          <Property Name="M16" Type="nvarchar" MaxLength="255" />
+          <Property Name="A16" Type="float" />
+          <Property Name="M17" Type="nvarchar" MaxLength="255" />
+          <Property Name="A17" Type="float" />
+          <Property Name="M18" Type="nvarchar" MaxLength="255" />
+          <Property Name="A18" Type="float" />
+          <Property Name="M19" Type="nvarchar" MaxLength="255" />
+          <Property Name="A19" Type="float" />
+          <Property Name="M20" Type="nvarchar" MaxLength="255" />
+          <Property Name="A20" Type="float" />
+          <Property Name="M21" Type="nvarchar" MaxLength="255" />
+          <Property Name="A21" Type="float" />
+          <Property Name="M22" Type="nvarchar" MaxLength="255" />
+          <Property Name="A22" Type="float" />
+          <Property Name="M23" Type="nvarchar" MaxLength="255" />
+          <Property Name="A23" Type="float" />
+          <Property Name="M24" Type="nvarchar" MaxLength="255" />
+          <Property Name="A24" Type="float" />
+          <Property Name="M25" Type="nvarchar" MaxLength="255" />
+          <Property Name="A25" Type="float" />
+          <Property Name="M26" Type="nvarchar" MaxLength="255" />
+          <Property Name="A26" Type="float" />
+          <Property Name="M27" Type="nvarchar" MaxLength="255" />
+          <Property Name="A27" Type="float" />
+          <Property Name="M28" Type="nvarchar" MaxLength="255" />
+          <Property Name="A28" Type="float" />
+          <Property Name="M29" Type="nvarchar" MaxLength="255" />
+          <Property Name="A29" Type="float" />
+          <Property Name="M30" Type="nvarchar" MaxLength="255" />
+          <Property Name="A30" Type="float" />
+          <Property Name="M31" Type="nvarchar" MaxLength="255" />
+          <Property Name="A31" Type="float" />
+          <Property Name="M32" Type="nvarchar" MaxLength="255" />
+          <Property Name="A32" Type="float" />
+          <Property Name="M33" Type="nvarchar" MaxLength="255" />
+          <Property Name="A33" Type="float" />
+          <Property Name="M34" Type="nvarchar" MaxLength="255" />
+          <Property Name="A34" Type="float" />
+          <Property Name="M35" Type="nvarchar" MaxLength="255" />
+          <Property Name="A35" Type="float" />
+          <Property Name="M36" Type="nvarchar" MaxLength="255" />
+          <Property Name="A36" Type="float" />
+          <Property Name="M37" Type="nvarchar" MaxLength="255" />
+          <Property Name="A37" Type="float" />
+          <Property Name="M38" Type="nvarchar" MaxLength="255" />
+          <Property Name="A38" Type="float" />
+          <Property Name="M39" Type="nvarchar" MaxLength="255" />
+          <Property Name="A39" Type="float" />
+          <Property Name="M40" Type="nvarchar" MaxLength="255" />
+          <Property Name="A40" Type="float" />
+          <Property Name="M41" Type="nvarchar" MaxLength="255" />
+          <Property Name="A41" Type="float" />
+          <Property Name="M42" Type="nvarchar" MaxLength="255" />
+          <Property Name="A42" Type="float" />
+        </EntityType>
+        <EntityType Name="KHKArtikel">
+          <Key>
+            <PropertyRef Name="Artikelnummer" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="Artikelnummer" Type="varchar" MaxLength="31" Nullable="false" />
+          <Property Name="Mandant" Type="smallint" Nullable="false" />
+          <Property Name="Bezeichnung1" Type="varchar" MaxLength="50" />
+          <Property Name="Bezeichnung2" Type="varchar" MaxLength="50" />
+          <Property Name="Matchcode" Type="varchar" MaxLength="50" />
+          <Property Name="Langtext" Type="text" />
+          <Property Name="Dimensionstext" Type="text" />
+          <Property Name="DimensionstextHTML" Type="text" />
+          <Property Name="DimensionstextRTF" Type="text" />
+          <Property Name="Memo" Type="text" />
+          <Property Name="Artikelgruppe" Type="varchar" MaxLength="15" />
+          <Property Name="Ersatzartikelnummer" Type="varchar" MaxLength="31" />
+          <Property Name="Hersteller" Type="varchar" MaxLength="20" />
+          <Property Name="HArtikelnummer" Type="varchar" MaxLength="20" />
+          <Property Name="Steuerklasse" Type="smallint" />
+          <Property Name="Erloescode" Type="smallint" />
+          <Property Name="Wareneingangscode" Type="smallint" />
+          <Property Name="Wareneinsatzcode" Type="smallint" />
+          <Property Name="Warenbestandcode" Type="smallint" />
+          <Property Name="SachkontoVK" Type="varchar" MaxLength="20" />
+          <Property Name="SachkontoEK" Type="varchar" MaxLength="20" />
+          <Property Name="SachkontoWZ" Type="varchar" MaxLength="20" />
+          <Property Name="SachkontoWB" Type="varchar" MaxLength="20" />
+          <Property Name="IstEinmalartikel" Type="smallint" Nullable="false" />
+          <Property Name="IstProvisionierbar" Type="smallint" Nullable="false" />
+          <Property Name="Nachweispflicht" Type="smallint" />
+          <Property Name="Verkaufsmengeneinheit" Type="varchar" MaxLength="5" />
+          <Property Name="MengenberechnungVK" Type="varchar" MaxLength="10" />
+          <Property Name="DezimalstellenVK" Type="smallint" />
+          <Property Name="UmrechnungsfaktorVK" Type="money" />
+          <Property Name="VerpackungseinheitVK" Type="varchar" MaxLength="5" />
+          <Property Name="UmrechnungsfaktorVPVK" Type="money" />
+          <Property Name="PreiseinheitVK" Type="smallint" />
+          <Property Name="Basismengeneinheit" Type="varchar" MaxLength="5" />
+          <Property Name="DezimalstellenBasis" Type="smallint" />
+          <Property Name="Lagermengeneinheit" Type="varchar" MaxLength="5" />
+          <Property Name="DezimalstellenLager" Type="smallint" />
+          <Property Name="UmrechnungsFaktorLME" Type="money" />
+          <Property Name="Lagerfuehrung" Type="smallint" Nullable="false" />
+          <Property Name="Lagerplatzzuordnung" Type="smallint" Nullable="false" />
+          <Property Name="Gewichtseinheit" Type="varchar" MaxLength="10" />
+          <Property Name="PreispflegeEK" Type="smallint" />
+          <Property Name="IstBestellartikel" Type="smallint" Nullable="false" />
+          <Property Name="IstVerkaufsartikel" Type="smallint" Nullable="false" />
+          <Property Name="Stuecklistentyp" Type="smallint" />
+          <Property Name="IstKundenkartei" Type="smallint" Nullable="false" />
+          <Property Name="IstLieferantenkartei" Type="smallint" Nullable="false" />
+          <Property Name="IstRabattfaehig" Type="smallint" Nullable="false" />
+          <Property Name="Gemeinkostenzuschlag" Type="money" />
+          <Property Name="Bezugskostenzuschlag" Type="money" />
+          <Property Name="Gewinnzuschlag" Type="money" />
+          <Property Name="Bewertungssatz" Type="varchar" MaxLength="5" />
+          <Property Name="Kostenstelle" Type="varchar" MaxLength="20" />
+          <Property Name="Kostentraeger" Type="varchar" MaxLength="20" />
+          <Property Name="IstFavorit" Type="smallint" Nullable="false" />
+          <Property Name="IstVorlage" Type="smallint" Nullable="false" />
+          <Property Name="Chargenpflicht" Type="smallint" />
+          <Property Name="Warennummer" Type="varchar" MaxLength="10" />
+          <Property Name="Ursprungsregion" Type="varchar" MaxLength="10" />
+          <Property Name="Bestimmungsregion" Type="varchar" MaxLength="10" />
+          <Property Name="Rabattgruppe" Type="varchar" MaxLength="10" />
+          <Property Name="Laenge" Type="money" />
+          <Property Name="Breite" Type="money" />
+          <Property Name="Hoehe" Type="money" />
+          <Property Name="IntrastatMengeneinheit" Type="varchar" MaxLength="20" />
+          <Property Name="UmrechnungsfaktorIntraME" Type="money" />
+          <Property Name="DezimalstellenIntraME" Type="smallint" />
+          <Property Name="Hauptartikelgruppe" Type="varchar" MaxLength="15" />
+          <Property Name="Vaterartikelgruppe" Type="varchar" MaxLength="15" />
+          <Property Name="Grundpreiseinheit" Type="varchar" MaxLength="5" />
+          <Property Name="UmrechnungsfaktorGP" Type="money" />
+          <Property Name="GrundpreisBasis" Type="money" />
+          <Property Name="PlatzID" Type="int" />
+          <Property Name="Entnahmeverfahren" Type="varchar" MaxLength="6" />
+          <Property Name="Variante" Type="varchar" MaxLength="10" />
+          <Property Name="Inventurmethode" Type="smallint" />
+          <Property Name="Aktiv" Type="smallint" Nullable="false" />
+          <Property Name="Artikelart" Type="smallint" />
+          <Property Name="RessourcenRef" Type="varchar" MaxLength="20" />
+          <Property Name="Zeichnungsnummer" Type="varchar" MaxLength="50" />
+          <Property Name="GemeinkostenID" Type="varchar" MaxLength="4" />
+          <Property Name="MinimaleLosgroesse" Type="money" />
+          <Property Name="MaximaleLosgroesse" Type="money" />
+          <Property Name="IstFertigungsartikel" Type="smallint" Nullable="false" />
+          <Property Name="IstUnterbaugruppe" Type="smallint" Nullable="false" />
+          <Property Name="IstErsatzteil" Type="smallint" Nullable="false" />
+          <Property Name="IstVerschleissteil" Type="smallint" Nullable="false" />
+          <Property Name="Schwundart" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Schwund" Type="money" Nullable="false" />
+          <Property Name="PKonfigIstKonfigArtikel" Type="smallint" Nullable="false" />
+          <Property Name="PKonfigAnwendung" Type="varchar" MaxLength="100" />
+          <Property Name="IstFremdleistung" Type="smallint" Nullable="false" />
+          <Property Name="KalkulationsLosgroesse" Type="money" Nullable="false" />
+          <Property Name="Ursprungsland" Type="varchar" MaxLength="10" />
+          <Property Name="StatWertEingang" Type="money" />
+          <Property Name="StatWertVersendung" Type="money" />
+          <Property Name="Eigenmasse" Type="money" />
+          <Property Name="StatVerfahren" Type="smallint" />
+          <Property Name="DezimalstellenPreis" Type="smallint" Nullable="false" />
+          <Property Name="Verbrauchsteuer" Type="smallint" Nullable="false" />
+          <Property Name="Besteuerungsart" Type="smallint" Nullable="false" />
+          <Property Name="LangtextHTML" Type="text" />
+          <Property Name="LangtextRTF" Type="text" />
+          <Property Name="Herkunft" Type="smallint" />
+          <Property Name="Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHKPpsArbeitsgaenge">
+          <Key>
+            <PropertyRef Name="Arbeitsgangnummer" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="Arbeitsgangnummer" Type="varchar" MaxLength="31" Nullable="false" />
+          <Property Name="Mandant" Type="smallint" Nullable="false" />
+          <Property Name="Bezeichnung1" Type="varchar" MaxLength="50" />
+          <Property Name="Bezeichnung2" Type="varchar" MaxLength="50" />
+          <Property Name="Matchcode" Type="varchar" MaxLength="50" />
+          <Property Name="Memo" Type="text" />
+          <Property Name="Dimensionstext" Type="text" />
+          <Property Name="Ruestzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Ruestzeit" Type="money" />
+          <Property Name="Stueckzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Stueckzeit" Type="money" />
+          <Property Name="Umrechnungsfaktor" Type="money" />
+          <Property Name="TransportzeitFremdText" Type="varchar" MaxLength="13" />
+          <Property Name="TransportzeitFremd" Type="money" />
+          <Property Name="StueckzeitFremdText" Type="varchar" MaxLength="13" />
+          <Property Name="StueckzeitFremd" Type="money" />
+          <Property Name="Lieferant" Type="varchar" MaxLength="20" />
+          <Property Name="Artikelnummer" Type="varchar" MaxLength="31" />
+          <Property Name="AuspraegungId" Type="int" Nullable="false" />
+          <Property Name="Planzeit" Type="money" />
+          <Property Name="Planzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Arbeitsplatznummer" Type="varchar" MaxLength="31" />
+          <Property Name="Pufferzeit" Type="money" />
+          <Property Name="Pufferzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Ueberlappungzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Ueberlappungzeit" Type="money" />
+          <Property Name="Ueberlappungmenge" Type="money" />
+          <Property Name="Ueberlappungtyp" Type="varchar" MaxLength="1" />
+          <Property Name="Ueberlappungprozent" Type="money" />
+          <Property Name="AusfuehrungsArt" Type="varchar" MaxLength="1" />
+          <Property Name="DefaultRessourceTyp" Type="smallint" />
+          <Property Name="DefaultRessourceNummer" Type="varchar" MaxLength="31" />
+          <Property Name="Aktiv" Type="smallint" Nullable="false" />
+          <Property Name="Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHKPpsArbeitsplaetze">
+          <Key>
+            <PropertyRef Name="Arbeitsplatznummer" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="Arbeitsplatznummer" Type="varchar" MaxLength="31" Nullable="false" />
+          <Property Name="Mandant" Type="smallint" Nullable="false" />
+          <Property Name="Bezeichnung1" Type="varchar" MaxLength="50" />
+          <Property Name="Bezeichnung2" Type="varchar" MaxLength="50" />
+          <Property Name="Matchcode" Type="varchar" MaxLength="50" />
+          <Property Name="Memo" Type="text" />
+          <Property Name="Schichtplannummer" Type="varchar" MaxLength="31" />
+          <Property Name="Wartezeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Wartezeit" Type="money" />
+          <Property Name="Leistungsgrad" Type="money" />
+          <Property Name="LohnkostenBetrieb" Type="money" />
+          <Property Name="ArbeitsplatzkostenBetrieb" Type="money" />
+          <Property Name="LohnkostenRuesten" Type="money" />
+          <Property Name="ArbeitsplatzkostenRuesten" Type="money" />
+          <Property Name="Zusatzkosten" Type="money" />
+          <Property Name="Kostenstelle" Type="varchar" MaxLength="20" />
+          <Property Name="Kostentraeger" Type="varchar" MaxLength="20" />
+          <Property Name="Pausenabzug" Type="smallint" Nullable="false" />
+          <Property Name="Fertigungsgemeinkostenzuschlag" Type="money" />
+          <Property Name="NurBarcode" Type="varchar" MaxLength="1" />
+          <Property Name="Aktiv" Type="smallint" Nullable="false" />
+          <Property Name="BdeTerminalId" Type="varchar" MaxLength="20" />
+          <Property Name="Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHKPpsRessourcenAGPositionen">
+          <Key>
+            <PropertyRef Name="BelAGPosID" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="BelAGPosID" Type="int" Nullable="false" />
+          <Property Name="Mandant" Type="smallint" Nullable="false" />
+          <Property Name="BelPosID" Type="int" />
+          <Property Name="Position" Type="smallint" Nullable="false" />
+          <Property Name="RessourceTypAg" Type="smallint" Nullable="false" />
+          <Property Name="RessourcenummerAg" Type="varchar" MaxLength="31" />
+          <Property Name="Matchcode" Type="varchar" MaxLength="50" />
+          <Property Name="Dimensionstext" Type="text" />
+          <Property Name="IstMainAGPos" Type="smallint" Nullable="false" />
+          <Property Name="Leistungsgrad" Type="money" />
+          <Property Name="Wartezeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Wartezeit" Type="money" />
+          <Property Name="Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHKPpsRessourcenkopf">
+          <Key>
+            <PropertyRef Name="Artikelnummer" />
+            <PropertyRef Name="Variante" />
+            <PropertyRef Name="Mandant" />
+            <PropertyRef Name="AuspraegungID" />
+          </Key>
+          <Property Name="Artikelnummer" Type="varchar" MaxLength="31" Nullable="false" />
+          <Property Name="Variante" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="Mandant" Type="smallint" Nullable="false" />
+          <Property Name="Bezeichnung1" Type="varchar" MaxLength="50" />
+          <Property Name="Bezeichnung2" Type="varchar" MaxLength="50" />
+          <Property Name="Matchcode" Type="varchar" MaxLength="50" />
+          <Property Name="Memo" Type="text" />
+          <Property Name="Zeichnungsnummer" Type="varchar" MaxLength="50" />
+          <Property Name="VonMenge" Type="money" />
+          <Property Name="BisMenge" Type="money" />
+          <Property Name="VonDatum" Type="datetime" />
+          <Property Name="BisDatum" Type="datetime" />
+          <Property Name="IstOffen" Type="smallint" Nullable="false" />
+          <Property Name="Klassenummer" Type="varchar" MaxLength="31" />
+          <Property Name="IstFremdfertigung" Type="smallint" Nullable="false" />
+          <Property Name="KundenKto" Type="varchar" MaxLength="20" />
+          <Property Name="VariantenID" Type="int" />
+          <Property Name="IstDefault" Type="smallint" />
+          <Property Name="Preisfindung" Type="varchar" MaxLength="2" />
+          <Property Name="Variantengruppe" Type="varchar" MaxLength="10" />
+          <Property Name="Menge" Type="money" />
+          <Property Name="VKPreis" Type="money" />
+          <Property Name="Fertigdatum" Type="datetime" />
+          <Property Name="LieferBelID" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="2" />
+          <Property Name="StatIndex" Type="smallint" />
+          <Property Name="AuspraegungID" Type="int" Nullable="false" />
+          <Property Name="DimText" Type="text" />
+          <Property Name="Produktionszeit" Type="smallint" />
+          <Property Name="UmrechnungsfaktorPZ" Type="money" />
+          <Property Name="Sprache" Type="varchar" MaxLength="3" />
+          <Property Name="Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHKPpsRessourcenPositionen">
+          <Key>
+            <PropertyRef Name="Mandant" />
+            <PropertyRef Name="BelPosID" />
+          </Key>
+          <Property Name="Artikelnummer" Type="varchar" MaxLength="31" Nullable="false" />
+          <Property Name="Variante" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="AuspraegungIDKopf" Type="int" Nullable="false" />
+          <Property Name="Mandant" Type="smallint" Nullable="false" />
+          <Property Name="Position" Type="smallint" Nullable="false" />
+          <Property Name="Ressourcetyp" Type="varchar" MaxLength="2" />
+          <Property Name="Ressourcenummer" Type="varchar" MaxLength="31" />
+          <Property Name="Arbeitsgangnummer" Type="varchar" MaxLength="31" />
+          <Property Name="Matchcode" Type="varchar" MaxLength="50" />
+          <Property Name="Dimensionstext" Type="text" />
+          <Property Name="Menge" Type="money" />
+          <Property Name="MengeNKS" Type="int" />
+          <Property Name="MengeBerechnung" Type="varchar" MaxLength="50" />
+          <Property Name="MengeDimensionen" Type="varchar" MaxLength="50" />
+          <Property Name="Umrechnungsfaktor" Type="money" />
+          <Property Name="IstEinmalmenge" Type="smallint" Nullable="false" />
+          <Property Name="Ruestzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Ruestzeit" Type="money" />
+          <Property Name="Stueckzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Stueckzeit" Type="money" />
+          <Property Name="Pufferzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Pufferzeit" Type="money" />
+          <Property Name="Ueberlappungzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Ueberlappungzeit" Type="money" />
+          <Property Name="Ueberlappungmenge" Type="money" />
+          <Property Name="Preis" Type="money" />
+          <Property Name="Lagermengeneinheit" Type="varchar" MaxLength="5" />
+          <Property Name="Transportzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Transportzeit" Type="money" />
+          <Property Name="AusfuehrungsArtAG" Type="varchar" MaxLength="1" />
+          <Property Name="AuspraegungID" Type="int" />
+          <Property Name="PlatzID" Type="int" />
+          <Property Name="BelPosID" Type="int" Nullable="false" />
+          <Property Name="IstGeloescht" Type="smallint" Nullable="false" />
+          <Property Name="IstOffen" Type="smallint" Nullable="false" />
+          <Property Name="PositionExtern" Type="int" />
+          <Property Name="PositionExternPraefix" Type="varchar" MaxLength="9" />
+          <Property Name="PositionExternSuffix" Type="varchar" MaxLength="9" />
+          <Property Name="Materialteileart" Type="varchar" MaxLength="3" />
+          <Property Name="Auspraegungstyp" Type="varchar" MaxLength="20" />
+          <Property Name="Planzeit" Type="money" />
+          <Property Name="Planzeittext" Type="varchar" MaxLength="13" />
+          <Property Name="Ueberlappungtyp" Type="varchar" MaxLength="1" />
+          <Property Name="Ueberlappungprozent" Type="money" />
+          <Property Name="MengeNach" Type="money" />
+          <Property Name="IstTextuebergabe" Type="smallint" />
+          <Property Name="IstCadFixPos" Type="smallint" Nullable="false" />
+          <Property Name="PosVariante" Type="varchar" MaxLength="4" />
+          <Property Name="PositionCAD" Type="varchar" MaxLength="10" />
+          <Property Name="Anzahl" Type="int" />
+          <Property Name="FormelID" Type="varchar" MaxLength="20" />
+          <Property Name="DIM1" Type="money" />
+          <Property Name="DIM2" Type="money" />
+          <Property Name="DIM3" Type="money" />
+          <Property Name="Fremdfertiger" Type="varchar" MaxLength="20" />
+          <Property Name="SollEinzelpreis" Type="money" />
+          <Property Name="Leistungsgrad" Type="money" />
+          <Property Name="RessourceTypAg" Type="smallint" />
+          <Property Name="RessourceNummerAg" Type="varchar" MaxLength="31" />
+          <Property Name="PositionExternAnzeige" Type="varchar" MaxLength="11" />
+          <Property Name="KapazAnzahlMax" Type="smallint" Nullable="false" />
+          <Property Name="MindestmengeAG" Type="money" Nullable="false" />
+          <Property Name="Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KHKTan">
+          <Key>
+            <PropertyRef Name="Tabelle" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="Tabelle" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Mandant" Type="smallint" Nullable="false" />
+          <Property Name="Tan" Type="int" />
+          <Property Name="Timestamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <Association Name="KHKPpsRtionenKHKPpsRtionen">
+          <End Role="KHKPpsRessourcenPositionen" Type="Self.KHKPpsRessourcenPositionen" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="KHKPpsRessourcenAGPositionen" Type="Self.KHKPpsRessourcenAGPositionen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHKPpsRessourcenPositionen">
+              <PropertyRef Name="Mandant" />
+              <PropertyRef Name="BelPosID" />
+            </Principal>
+            <Dependent Role="KHKPpsRessourcenAGPositionen">
+              <PropertyRef Name="Mandant" />
+              <PropertyRef Name="BelPosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="amxSpCopyArtikel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Mandant" Type="smallint" Mode="In" />
+          <Parameter Name="ArtikelnummerNew" Type="varchar" Mode="In" />
+          <Parameter Name="ArtikelnummerCopyFrom" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="OLKHKEntitiesStoreContainer">
+          <EntitySet Name="amxImportRL" EntityType="Self.amxImportRL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHKArtikel" EntityType="Self.KHKArtikel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHKPpsArbeitsgaenge" EntityType="Self.KHKPpsArbeitsgaenge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHKPpsArbeitsplaetze" EntityType="Self.KHKPpsArbeitsplaetze" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHKPpsRessourcenAGPositionen" EntityType="Self.KHKPpsRessourcenAGPositionen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHKPpsRessourcenkopf" EntityType="Self.KHKPpsRessourcenkopf" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHKPpsRessourcenPositionen" EntityType="Self.KHKPpsRessourcenPositionen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHKTan" EntityType="Self.KHKTan" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="KHKPpsRtionenKHKPpsRtionen" Association="Self.KHKPpsRtionenKHKPpsRtionen">
+            <End Role="KHKPpsRessourcenPositionen" EntitySet="KHKPpsRessourcenPositionen" />
+            <End Role="KHKPpsRessourcenAGPositionen" EntitySet="KHKPpsRessourcenAGPositionen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OLKHKEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KHKArtikel">
+          <Key>
+            <PropertyRef Name="Artikelnummer" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="Artikelnummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mandant" Type="Int16" Nullable="false" />
+          <Property Name="Bezeichnung1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bezeichnung2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Matchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Langtext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Dimensionstext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DimensionstextHTML" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DimensionstextRTF" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Artikelgruppe" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Ersatzartikelnummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Hersteller" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="HArtikelnummer" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Steuerklasse" Type="Int16" />
+          <Property Name="Erloescode" Type="Int16" />
+          <Property Name="Wareneingangscode" Type="Int16" />
+          <Property Name="Wareneinsatzcode" Type="Int16" />
+          <Property Name="Warenbestandcode" Type="Int16" />
+          <Property Name="SachkontoVK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SachkontoEK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SachkontoWZ" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SachkontoWB" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IstEinmalartikel" Type="Int16" Nullable="false" />
+          <Property Name="IstProvisionierbar" Type="Int16" Nullable="false" />
+          <Property Name="Nachweispflicht" Type="Int16" />
+          <Property Name="Verkaufsmengeneinheit" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="MengenberechnungVK" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DezimalstellenVK" Type="Int16" />
+          <Property Name="UmrechnungsfaktorVK" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="VerpackungseinheitVK" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="UmrechnungsfaktorVPVK" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PreiseinheitVK" Type="Int16" />
+          <Property Name="Basismengeneinheit" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="DezimalstellenBasis" Type="Int16" />
+          <Property Name="Lagermengeneinheit" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="DezimalstellenLager" Type="Int16" />
+          <Property Name="UmrechnungsFaktorLME" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Lagerfuehrung" Type="Int16" Nullable="false" />
+          <Property Name="Lagerplatzzuordnung" Type="Int16" Nullable="false" />
+          <Property Name="Gewichtseinheit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PreispflegeEK" Type="Int16" />
+          <Property Name="IstBestellartikel" Type="Int16" Nullable="false" />
+          <Property Name="IstVerkaufsartikel" Type="Int16" Nullable="false" />
+          <Property Name="Stuecklistentyp" Type="Int16" />
+          <Property Name="IstKundenkartei" Type="Int16" Nullable="false" />
+          <Property Name="IstLieferantenkartei" Type="Int16" Nullable="false" />
+          <Property Name="IstRabattfaehig" Type="Int16" Nullable="false" />
+          <Property Name="Gemeinkostenzuschlag" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Bezugskostenzuschlag" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Gewinnzuschlag" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Bewertungssatz" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Kostenstelle" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Kostentraeger" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IstFavorit" Type="Int16" Nullable="false" />
+          <Property Name="IstVorlage" Type="Int16" Nullable="false" />
+          <Property Name="Chargenpflicht" Type="Int16" />
+          <Property Name="Warennummer" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ursprungsregion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Bestimmungsregion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Rabattgruppe" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Laenge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Breite" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Hoehe" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IntrastatMengeneinheit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UmrechnungsfaktorIntraME" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DezimalstellenIntraME" Type="Int16" />
+          <Property Name="Hauptartikelgruppe" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Vaterartikelgruppe" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Grundpreiseinheit" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="UmrechnungsfaktorGP" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GrundpreisBasis" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PlatzID" Type="Int32" />
+          <Property Name="Entnahmeverfahren" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Variante" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Inventurmethode" Type="Int16" />
+          <Property Name="Aktiv" Type="Int16" Nullable="false" />
+          <Property Name="Artikelart" Type="Int16" />
+          <Property Name="RessourcenRef" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Zeichnungsnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GemeinkostenID" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="MinimaleLosgroesse" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MaximaleLosgroesse" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IstFertigungsartikel" Type="Int16" Nullable="false" />
+          <Property Name="IstUnterbaugruppe" Type="Int16" Nullable="false" />
+          <Property Name="IstErsatzteil" Type="Int16" Nullable="false" />
+          <Property Name="IstVerschleissteil" Type="Int16" Nullable="false" />
+          <Property Name="Schwundart" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Schwund" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="PKonfigIstKonfigArtikel" Type="Int16" Nullable="false" />
+          <Property Name="PKonfigAnwendung" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IstFremdleistung" Type="Int16" Nullable="false" />
+          <Property Name="KalkulationsLosgroesse" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Ursprungsland" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StatWertEingang" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StatWertVersendung" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Eigenmasse" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StatVerfahren" Type="Int16" />
+          <Property Name="DezimalstellenPreis" Type="Int16" Nullable="false" />
+          <Property Name="Verbrauchsteuer" Type="Int16" Nullable="false" />
+          <Property Name="Besteuerungsart" Type="Int16" Nullable="false" />
+          <Property Name="LangtextHTML" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LangtextRTF" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Herkunft" Type="Int16" />
+          <Property Name="Timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="KHKPpsArbeitsgaenge">
+          <Key>
+            <PropertyRef Name="Arbeitsgangnummer" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="Arbeitsgangnummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mandant" Type="Int16" Nullable="false" />
+          <Property Name="Bezeichnung1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bezeichnung2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Matchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Dimensionstext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Ruestzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Ruestzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Stueckzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Stueckzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Umrechnungsfaktor" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TransportzeitFremdText" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="TransportzeitFremd" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StueckzeitFremdText" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="StueckzeitFremd" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Lieferant" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Artikelnummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="AuspraegungId" Type="Int32" Nullable="false" />
+          <Property Name="Planzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Planzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Arbeitsplatznummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Pufferzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Pufferzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Ueberlappungzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Ueberlappungzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Ueberlappungmenge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Ueberlappungtyp" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Ueberlappungprozent" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AusfuehrungsArt" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultRessourceTyp" Type="Int16" />
+          <Property Name="DefaultRessourceNummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Aktiv" Type="Int16" Nullable="false" />
+          <Property Name="Timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="KHKPpsArbeitsplaetze">
+          <Key>
+            <PropertyRef Name="Arbeitsplatznummer" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="Arbeitsplatznummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mandant" Type="Int16" Nullable="false" />
+          <Property Name="Bezeichnung1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bezeichnung2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Matchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Schichtplannummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Wartezeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Wartezeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Leistungsgrad" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LohnkostenBetrieb" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ArbeitsplatzkostenBetrieb" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LohnkostenRuesten" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ArbeitsplatzkostenRuesten" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Zusatzkosten" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Kostenstelle" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Kostentraeger" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Pausenabzug" Type="Int16" Nullable="false" />
+          <Property Name="Fertigungsgemeinkostenzuschlag" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="NurBarcode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Aktiv" Type="Int16" Nullable="false" />
+          <Property Name="BdeTerminalId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="KHKPpsRessourcenAGPositionen">
+          <Key>
+            <PropertyRef Name="BelAGPosID" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="BelAGPosID" Type="Int32" Nullable="false" />
+          <Property Name="Mandant" Type="Int16" Nullable="false" />
+          <Property Name="BelPosID" Type="Int32" />
+          <Property Name="Position" Type="Int16" Nullable="false" />
+          <Property Name="RessourceTypAg" Type="Int16" Nullable="false" />
+          <Property Name="RessourcenummerAg" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Matchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dimensionstext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IstMainAGPos" Type="Int16" Nullable="false" />
+          <Property Name="Leistungsgrad" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Wartezeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Wartezeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="KHKPpsRessourcenPositionen" Relationship="Self.KHKPpsRtionenKHKPpsRtionen" FromRole="KHKPpsRessourcenAGPositionen" ToRole="KHKPpsRessourcenPositionen" />
+        </EntityType>
+        <EntityType Name="KHKPpsRessourcenkopf">
+          <Key>
+            <PropertyRef Name="Artikelnummer" />
+            <PropertyRef Name="Variante" />
+            <PropertyRef Name="Mandant" />
+            <PropertyRef Name="AuspraegungID" />
+          </Key>
+          <Property Name="Artikelnummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Variante" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mandant" Type="Int16" Nullable="false" />
+          <Property Name="Bezeichnung1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bezeichnung2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Matchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Zeichnungsnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VonMenge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="BisMenge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="VonDatum" Type="DateTime" Precision="3" />
+          <Property Name="BisDatum" Type="DateTime" Precision="3" />
+          <Property Name="IstOffen" Type="Int16" Nullable="false" />
+          <Property Name="Klassenummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="IstFremdfertigung" Type="Int16" Nullable="false" />
+          <Property Name="KundenKto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VariantenID" Type="Int32" />
+          <Property Name="IstDefault" Type="Int16" />
+          <Property Name="Preisfindung" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Variantengruppe" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Menge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="VKPreis" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Fertigdatum" Type="DateTime" Precision="3" />
+          <Property Name="LieferBelID" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="StatIndex" Type="Int16" />
+          <Property Name="AuspraegungID" Type="Int32" Nullable="false" />
+          <Property Name="DimText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Produktionszeit" Type="Int16" />
+          <Property Name="UmrechnungsfaktorPZ" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Sprache" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="KHKPpsRessourcenPositionen">
+          <Key>
+            <PropertyRef Name="Mandant" />
+            <PropertyRef Name="BelPosID" />
+          </Key>
+          <Property Name="Artikelnummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Variante" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AuspraegungIDKopf" Type="Int32" Nullable="false" />
+          <Property Name="Mandant" Type="Int16" Nullable="false" />
+          <Property Name="Position" Type="Int16" Nullable="false" />
+          <Property Name="Ressourcetyp" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Ressourcenummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Arbeitsgangnummer" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="Matchcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Dimensionstext" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Menge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MengeNKS" Type="Int32" />
+          <Property Name="MengeBerechnung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MengeDimensionen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Umrechnungsfaktor" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IstEinmalmenge" Type="Int16" Nullable="false" />
+          <Property Name="Ruestzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Ruestzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Stueckzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Stueckzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Pufferzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Pufferzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Ueberlappungzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Ueberlappungzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Ueberlappungmenge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Preis" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Lagermengeneinheit" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Transportzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Transportzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="AusfuehrungsArtAG" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="AuspraegungID" Type="Int32" />
+          <Property Name="PlatzID" Type="Int32" />
+          <Property Name="BelPosID" Type="Int32" Nullable="false" />
+          <Property Name="IstGeloescht" Type="Int16" Nullable="false" />
+          <Property Name="IstOffen" Type="Int16" Nullable="false" />
+          <Property Name="PositionExtern" Type="Int32" />
+          <Property Name="PositionExternPraefix" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="PositionExternSuffix" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Materialteileart" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Auspraegungstyp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Planzeit" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Planzeittext" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Ueberlappungtyp" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Ueberlappungprozent" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MengeNach" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IstTextuebergabe" Type="Int16" />
+          <Property Name="IstCadFixPos" Type="Int16" Nullable="false" />
+          <Property Name="PosVariante" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="PositionCAD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Anzahl" Type="Int32" />
+          <Property Name="FormelID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DIM1" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DIM2" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DIM3" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Fremdfertiger" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SollEinzelpreis" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Leistungsgrad" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RessourceTypAg" Type="Int16" />
+          <Property Name="RessourceNummerAg" Type="String" MaxLength="31" FixedLength="false" Unicode="false" />
+          <Property Name="PositionExternAnzeige" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="KapazAnzahlMax" Type="Int16" Nullable="false" />
+          <Property Name="MindestmengeAG" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Timestamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="KHKPpsRessourcenAGPositionen" Relationship="Self.KHKPpsRtionenKHKPpsRtionen" FromRole="KHKPpsRessourcenPositionen" ToRole="KHKPpsRessourcenAGPositionen" />
+        </EntityType>
+        <Association Name="KHKPpsRtionenKHKPpsRtionen">
+          <End Role="KHKPpsRessourcenPositionen" Type="Self.KHKPpsRessourcenPositionen" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="KHKPpsRessourcenAGPositionen" Type="Self.KHKPpsRessourcenAGPositionen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHKPpsRessourcenPositionen">
+              <PropertyRef Name="Mandant" />
+              <PropertyRef Name="BelPosID" />
+            </Principal>
+            <Dependent Role="KHKPpsRessourcenAGPositionen">
+              <PropertyRef Name="Mandant" />
+              <PropertyRef Name="BelPosID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OLEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KHKArtikel" EntityType="Self.KHKArtikel" />
+          <EntitySet Name="KHKPpsArbeitsgaenge" EntityType="Self.KHKPpsArbeitsgaenge" />
+          <EntitySet Name="KHKPpsArbeitsplaetze" EntityType="Self.KHKPpsArbeitsplaetze" />
+          <EntitySet Name="KHKPpsRessourcenAGPositionen" EntityType="Self.KHKPpsRessourcenAGPositionen" />
+          <EntitySet Name="KHKPpsRessourcenkopf" EntityType="Self.KHKPpsRessourcenkopf" />
+          <EntitySet Name="KHKPpsRessourcenPositionen" EntityType="Self.KHKPpsRessourcenPositionen" />
+          <AssociationSet Name="KHKPpsRtionenKHKPpsRtionen" Association="Self.KHKPpsRtionenKHKPpsRtionen">
+            <End Role="KHKPpsRessourcenPositionen" EntitySet="KHKPpsRessourcenPositionen" />
+            <End Role="KHKPpsRessourcenAGPositionen" EntitySet="KHKPpsRessourcenAGPositionen" />
+          </AssociationSet>
+          <FunctionImport Name="amxSpCopyArtikel">
+            <Parameter Name="Mandant" Mode="In" Type="Int16" />
+            <Parameter Name="ArtikelnummerNew" Mode="In" Type="String" />
+            <Parameter Name="ArtikelnummerCopyFrom" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="amxImportRL" EntityType="OLKHKEntities.amxImportRL" />
+          <EntitySet Name="KHKTan" EntityType="OLKHKEntities.KHKTan" />
+        </EntityContainer>
+        <EntityType Name="amxImportRL">
+          <Key>
+            <PropertyRef Name="ArtikelnummerNeu" />
+          </Key>
+          <Property Name="Typ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ArtikelnummerNeu" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Artikelnummer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Matchcode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="M1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A1" Type="Double" />
+          <Property Name="M2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A2" Type="Double" />
+          <Property Name="M3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A3" Type="Double" />
+          <Property Name="M4" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A4" Type="Double" />
+          <Property Name="M5" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A5" Type="Double" />
+          <Property Name="M6" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A6" Type="Double" />
+          <Property Name="M7" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A7" Type="Double" />
+          <Property Name="M8" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A8" Type="Double" />
+          <Property Name="M9" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A9" Type="Double" />
+          <Property Name="M10" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A10" Type="Double" />
+          <Property Name="M11" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A11" Type="Double" />
+          <Property Name="M12" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A12" Type="Double" />
+          <Property Name="M13" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A13" Type="Double" />
+          <Property Name="M14" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A14" Type="Double" />
+          <Property Name="M15" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A15" Type="Double" />
+          <Property Name="M16" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A16" Type="Double" />
+          <Property Name="M17" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A17" Type="Double" />
+          <Property Name="M18" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A18" Type="Double" />
+          <Property Name="M19" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A19" Type="Double" />
+          <Property Name="M20" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A20" Type="Double" />
+          <Property Name="M21" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A21" Type="Double" />
+          <Property Name="M22" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A22" Type="Double" />
+          <Property Name="M23" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A23" Type="Double" />
+          <Property Name="M24" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A24" Type="Double" />
+          <Property Name="M25" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A25" Type="Double" />
+          <Property Name="M26" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A26" Type="Double" />
+          <Property Name="M27" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A27" Type="Double" />
+          <Property Name="M28" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A28" Type="Double" />
+          <Property Name="M29" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A29" Type="Double" />
+          <Property Name="M30" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A30" Type="Double" />
+          <Property Name="M31" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A31" Type="Double" />
+          <Property Name="M32" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A32" Type="Double" />
+          <Property Name="M33" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A33" Type="Double" />
+          <Property Name="M34" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A34" Type="Double" />
+          <Property Name="M35" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A35" Type="Double" />
+          <Property Name="M36" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A36" Type="Double" />
+          <Property Name="M37" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A37" Type="Double" />
+          <Property Name="M38" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A38" Type="Double" />
+          <Property Name="M39" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A39" Type="Double" />
+          <Property Name="M40" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A40" Type="Double" />
+          <Property Name="M41" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A41" Type="Double" />
+          <Property Name="M42" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="A42" Type="Double" />
+        </EntityType>
+        <EntityType Name="KHKTan">
+          <Key>
+            <PropertyRef Name="Tabelle" />
+            <PropertyRef Name="Mandant" />
+          </Key>
+          <Property Name="Tabelle" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Mandant" Type="Int16" Nullable="false" />
+          <Property Name="Tan" Type="Int32" />
+          <Property Name="Timestamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OLKHKEntitiesStoreContainer" CdmEntityContainer="OLEntities">
+          <EntitySetMapping Name="KHKArtikel">
+            <EntityTypeMapping TypeName="OLKHKEntities.KHKArtikel">
+              <MappingFragment StoreEntitySet="KHKArtikel">
+                <ScalarProperty Name="Artikelnummer" ColumnName="Artikelnummer" />
+                <ScalarProperty Name="Mandant" ColumnName="Mandant" />
+                <ScalarProperty Name="Bezeichnung1" ColumnName="Bezeichnung1" />
+                <ScalarProperty Name="Bezeichnung2" ColumnName="Bezeichnung2" />
+                <ScalarProperty Name="Matchcode" ColumnName="Matchcode" />
+                <ScalarProperty Name="Langtext" ColumnName="Langtext" />
+                <ScalarProperty Name="Dimensionstext" ColumnName="Dimensionstext" />
+                <ScalarProperty Name="DimensionstextHTML" ColumnName="DimensionstextHTML" />
+                <ScalarProperty Name="DimensionstextRTF" ColumnName="DimensionstextRTF" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Artikelgruppe" ColumnName="Artikelgruppe" />
+                <ScalarProperty Name="Ersatzartikelnummer" ColumnName="Ersatzartikelnummer" />
+                <ScalarProperty Name="Hersteller" ColumnName="Hersteller" />
+                <ScalarProperty Name="HArtikelnummer" ColumnName="HArtikelnummer" />
+                <ScalarProperty Name="Steuerklasse" ColumnName="Steuerklasse" />
+                <ScalarProperty Name="Erloescode" ColumnName="Erloescode" />
+                <ScalarProperty Name="Wareneingangscode" ColumnName="Wareneingangscode" />
+                <ScalarProperty Name="Wareneinsatzcode" ColumnName="Wareneinsatzcode" />
+                <ScalarProperty Name="Warenbestandcode" ColumnName="Warenbestandcode" />
+                <ScalarProperty Name="SachkontoVK" ColumnName="SachkontoVK" />
+                <ScalarProperty Name="SachkontoEK" ColumnName="SachkontoEK" />
+                <ScalarProperty Name="SachkontoWZ" ColumnName="SachkontoWZ" />
+                <ScalarProperty Name="SachkontoWB" ColumnName="SachkontoWB" />
+                <ScalarProperty Name="IstEinmalartikel" ColumnName="IstEinmalartikel" />
+                <ScalarProperty Name="IstProvisionierbar" ColumnName="IstProvisionierbar" />
+                <ScalarProperty Name="Nachweispflicht" ColumnName="Nachweispflicht" />
+                <ScalarProperty Name="Verkaufsmengeneinheit" ColumnName="Verkaufsmengeneinheit" />
+                <ScalarProperty Name="MengenberechnungVK" ColumnName="MengenberechnungVK" />
+                <ScalarProperty Name="DezimalstellenVK" ColumnName="DezimalstellenVK" />
+                <ScalarProperty Name="UmrechnungsfaktorVK" ColumnName="UmrechnungsfaktorVK" />
+                <ScalarProperty Name="VerpackungseinheitVK" ColumnName="VerpackungseinheitVK" />
+                <ScalarProperty Name="UmrechnungsfaktorVPVK" ColumnName="UmrechnungsfaktorVPVK" />
+                <ScalarProperty Name="PreiseinheitVK" ColumnName="PreiseinheitVK" />
+                <ScalarProperty Name="Basismengeneinheit" ColumnName="Basismengeneinheit" />
+                <ScalarProperty Name="DezimalstellenBasis" ColumnName="DezimalstellenBasis" />
+                <ScalarProperty Name="Lagermengeneinheit" ColumnName="Lagermengeneinheit" />
+                <ScalarProperty Name="DezimalstellenLager" ColumnName="DezimalstellenLager" />
+                <ScalarProperty Name="UmrechnungsFaktorLME" ColumnName="UmrechnungsFaktorLME" />
+                <ScalarProperty Name="Lagerfuehrung" ColumnName="Lagerfuehrung" />
+                <ScalarProperty Name="Lagerplatzzuordnung" ColumnName="Lagerplatzzuordnung" />
+                <ScalarProperty Name="Gewichtseinheit" ColumnName="Gewichtseinheit" />
+                <ScalarProperty Name="PreispflegeEK" ColumnName="PreispflegeEK" />
+                <ScalarProperty Name="IstBestellartikel" ColumnName="IstBestellartikel" />
+                <ScalarProperty Name="IstVerkaufsartikel" ColumnName="IstVerkaufsartikel" />
+                <ScalarProperty Name="Stuecklistentyp" ColumnName="Stuecklistentyp" />
+                <ScalarProperty Name="IstKundenkartei" ColumnName="IstKundenkartei" />
+                <ScalarProperty Name="IstLieferantenkartei" ColumnName="IstLieferantenkartei" />
+                <ScalarProperty Name="IstRabattfaehig" ColumnName="IstRabattfaehig" />
+                <ScalarProperty Name="Gemeinkostenzuschlag" ColumnName="Gemeinkostenzuschlag" />
+                <ScalarProperty Name="Bezugskostenzuschlag" ColumnName="Bezugskostenzuschlag" />
+                <ScalarProperty Name="Gewinnzuschlag" ColumnName="Gewinnzuschlag" />
+                <ScalarProperty Name="Bewertungssatz" ColumnName="Bewertungssatz" />
+                <ScalarProperty Name="Kostenstelle" ColumnName="Kostenstelle" />
+                <ScalarProperty Name="Kostentraeger" ColumnName="Kostentraeger" />
+                <ScalarProperty Name="IstFavorit" ColumnName="IstFavorit" />
+                <ScalarProperty Name="IstVorlage" ColumnName="IstVorlage" />
+                <ScalarProperty Name="Chargenpflicht" ColumnName="Chargenpflicht" />
+                <ScalarProperty Name="Warennummer" ColumnName="Warennummer" />
+                <ScalarProperty Name="Ursprungsregion" ColumnName="Ursprungsregion" />
+                <ScalarProperty Name="Bestimmungsregion" ColumnName="Bestimmungsregion" />
+                <ScalarProperty Name="Rabattgruppe" ColumnName="Rabattgruppe" />
+                <ScalarProperty Name="Laenge" ColumnName="Laenge" />
+                <ScalarProperty Name="Breite" ColumnName="Breite" />
+                <ScalarProperty Name="Hoehe" ColumnName="Hoehe" />
+                <ScalarProperty Name="IntrastatMengeneinheit" ColumnName="IntrastatMengeneinheit" />
+                <ScalarProperty Name="UmrechnungsfaktorIntraME" ColumnName="UmrechnungsfaktorIntraME" />
+                <ScalarProperty Name="DezimalstellenIntraME" ColumnName="DezimalstellenIntraME" />
+                <ScalarProperty Name="Hauptartikelgruppe" ColumnName="Hauptartikelgruppe" />
+                <ScalarProperty Name="Vaterartikelgruppe" ColumnName="Vaterartikelgruppe" />
+                <ScalarProperty Name="Grundpreiseinheit" ColumnName="Grundpreiseinheit" />
+                <ScalarProperty Name="UmrechnungsfaktorGP" ColumnName="UmrechnungsfaktorGP" />
+                <ScalarProperty Name="GrundpreisBasis" ColumnName="GrundpreisBasis" />
+                <ScalarProperty Name="PlatzID" ColumnName="PlatzID" />
+                <ScalarProperty Name="Entnahmeverfahren" ColumnName="Entnahmeverfahren" />
+                <ScalarProperty Name="Variante" ColumnName="Variante" />
+                <ScalarProperty Name="Inventurmethode" ColumnName="Inventurmethode" />
+                <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+                <ScalarProperty Name="Artikelart" ColumnName="Artikelart" />
+                <ScalarProperty Name="RessourcenRef" ColumnName="RessourcenRef" />
+                <ScalarProperty Name="Zeichnungsnummer" ColumnName="Zeichnungsnummer" />
+                <ScalarProperty Name="GemeinkostenID" ColumnName="GemeinkostenID" />
+                <ScalarProperty Name="MinimaleLosgroesse" ColumnName="MinimaleLosgroesse" />
+                <ScalarProperty Name="MaximaleLosgroesse" ColumnName="MaximaleLosgroesse" />
+                <ScalarProperty Name="IstFertigungsartikel" ColumnName="IstFertigungsartikel" />
+                <ScalarProperty Name="IstUnterbaugruppe" ColumnName="IstUnterbaugruppe" />
+                <ScalarProperty Name="IstErsatzteil" ColumnName="IstErsatzteil" />
+                <ScalarProperty Name="IstVerschleissteil" ColumnName="IstVerschleissteil" />
+                <ScalarProperty Name="Schwundart" ColumnName="Schwundart" />
+                <ScalarProperty Name="Schwund" ColumnName="Schwund" />
+                <ScalarProperty Name="PKonfigIstKonfigArtikel" ColumnName="PKonfigIstKonfigArtikel" />
+                <ScalarProperty Name="PKonfigAnwendung" ColumnName="PKonfigAnwendung" />
+                <ScalarProperty Name="IstFremdleistung" ColumnName="IstFremdleistung" />
+                <ScalarProperty Name="KalkulationsLosgroesse" ColumnName="KalkulationsLosgroesse" />
+                <ScalarProperty Name="Ursprungsland" ColumnName="Ursprungsland" />
+                <ScalarProperty Name="StatWertEingang" ColumnName="StatWertEingang" />
+                <ScalarProperty Name="StatWertVersendung" ColumnName="StatWertVersendung" />
+                <ScalarProperty Name="Eigenmasse" ColumnName="Eigenmasse" />
+                <ScalarProperty Name="StatVerfahren" ColumnName="StatVerfahren" />
+                <ScalarProperty Name="DezimalstellenPreis" ColumnName="DezimalstellenPreis" />
+                <ScalarProperty Name="Verbrauchsteuer" ColumnName="Verbrauchsteuer" />
+                <ScalarProperty Name="Besteuerungsart" ColumnName="Besteuerungsart" />
+                <ScalarProperty Name="LangtextHTML" ColumnName="LangtextHTML" />
+                <ScalarProperty Name="LangtextRTF" ColumnName="LangtextRTF" />
+                <ScalarProperty Name="Herkunft" ColumnName="Herkunft" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHKPpsArbeitsgaenge">
+            <EntityTypeMapping TypeName="OLKHKEntities.KHKPpsArbeitsgaenge">
+              <MappingFragment StoreEntitySet="KHKPpsArbeitsgaenge">
+                <ScalarProperty Name="Arbeitsgangnummer" ColumnName="Arbeitsgangnummer" />
+                <ScalarProperty Name="Mandant" ColumnName="Mandant" />
+                <ScalarProperty Name="Bezeichnung1" ColumnName="Bezeichnung1" />
+                <ScalarProperty Name="Bezeichnung2" ColumnName="Bezeichnung2" />
+                <ScalarProperty Name="Matchcode" ColumnName="Matchcode" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Dimensionstext" ColumnName="Dimensionstext" />
+                <ScalarProperty Name="Ruestzeittext" ColumnName="Ruestzeittext" />
+                <ScalarProperty Name="Ruestzeit" ColumnName="Ruestzeit" />
+                <ScalarProperty Name="Stueckzeittext" ColumnName="Stueckzeittext" />
+                <ScalarProperty Name="Stueckzeit" ColumnName="Stueckzeit" />
+                <ScalarProperty Name="Umrechnungsfaktor" ColumnName="Umrechnungsfaktor" />
+                <ScalarProperty Name="TransportzeitFremdText" ColumnName="TransportzeitFremdText" />
+                <ScalarProperty Name="TransportzeitFremd" ColumnName="TransportzeitFremd" />
+                <ScalarProperty Name="StueckzeitFremdText" ColumnName="StueckzeitFremdText" />
+                <ScalarProperty Name="StueckzeitFremd" ColumnName="StueckzeitFremd" />
+                <ScalarProperty Name="Lieferant" ColumnName="Lieferant" />
+                <ScalarProperty Name="Artikelnummer" ColumnName="Artikelnummer" />
+                <ScalarProperty Name="AuspraegungId" ColumnName="AuspraegungId" />
+                <ScalarProperty Name="Planzeit" ColumnName="Planzeit" />
+                <ScalarProperty Name="Planzeittext" ColumnName="Planzeittext" />
+                <ScalarProperty Name="Arbeitsplatznummer" ColumnName="Arbeitsplatznummer" />
+                <ScalarProperty Name="Pufferzeit" ColumnName="Pufferzeit" />
+                <ScalarProperty Name="Pufferzeittext" ColumnName="Pufferzeittext" />
+                <ScalarProperty Name="Ueberlappungzeittext" ColumnName="Ueberlappungzeittext" />
+                <ScalarProperty Name="Ueberlappungzeit" ColumnName="Ueberlappungzeit" />
+                <ScalarProperty Name="Ueberlappungmenge" ColumnName="Ueberlappungmenge" />
+                <ScalarProperty Name="Ueberlappungtyp" ColumnName="Ueberlappungtyp" />
+                <ScalarProperty Name="Ueberlappungprozent" ColumnName="Ueberlappungprozent" />
+                <ScalarProperty Name="AusfuehrungsArt" ColumnName="AusfuehrungsArt" />
+                <ScalarProperty Name="DefaultRessourceTyp" ColumnName="DefaultRessourceTyp" />
+                <ScalarProperty Name="DefaultRessourceNummer" ColumnName="DefaultRessourceNummer" />
+                <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHKPpsArbeitsplaetze">
+            <EntityTypeMapping TypeName="OLKHKEntities.KHKPpsArbeitsplaetze">
+              <MappingFragment StoreEntitySet="KHKPpsArbeitsplaetze">
+                <ScalarProperty Name="Arbeitsplatznummer" ColumnName="Arbeitsplatznummer" />
+                <ScalarProperty Name="Mandant" ColumnName="Mandant" />
+                <ScalarProperty Name="Bezeichnung1" ColumnName="Bezeichnung1" />
+                <ScalarProperty Name="Bezeichnung2" ColumnName="Bezeichnung2" />
+                <ScalarProperty Name="Matchcode" ColumnName="Matchcode" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Schichtplannummer" ColumnName="Schichtplannummer" />
+                <ScalarProperty Name="Wartezeittext" ColumnName="Wartezeittext" />
+                <ScalarProperty Name="Wartezeit" ColumnName="Wartezeit" />
+                <ScalarProperty Name="Leistungsgrad" ColumnName="Leistungsgrad" />
+                <ScalarProperty Name="LohnkostenBetrieb" ColumnName="LohnkostenBetrieb" />
+                <ScalarProperty Name="ArbeitsplatzkostenBetrieb" ColumnName="ArbeitsplatzkostenBetrieb" />
+                <ScalarProperty Name="LohnkostenRuesten" ColumnName="LohnkostenRuesten" />
+                <ScalarProperty Name="ArbeitsplatzkostenRuesten" ColumnName="ArbeitsplatzkostenRuesten" />
+                <ScalarProperty Name="Zusatzkosten" ColumnName="Zusatzkosten" />
+                <ScalarProperty Name="Kostenstelle" ColumnName="Kostenstelle" />
+                <ScalarProperty Name="Kostentraeger" ColumnName="Kostentraeger" />
+                <ScalarProperty Name="Pausenabzug" ColumnName="Pausenabzug" />
+                <ScalarProperty Name="Fertigungsgemeinkostenzuschlag" ColumnName="Fertigungsgemeinkostenzuschlag" />
+                <ScalarProperty Name="NurBarcode" ColumnName="NurBarcode" />
+                <ScalarProperty Name="Aktiv" ColumnName="Aktiv" />
+                <ScalarProperty Name="BdeTerminalId" ColumnName="BdeTerminalId" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHKPpsRessourcenAGPositionen">
+            <EntityTypeMapping TypeName="OLKHKEntities.KHKPpsRessourcenAGPositionen">
+              <MappingFragment StoreEntitySet="KHKPpsRessourcenAGPositionen">
+                <ScalarProperty Name="BelAGPosID" ColumnName="BelAGPosID" />
+                <ScalarProperty Name="Mandant" ColumnName="Mandant" />
+                <ScalarProperty Name="BelPosID" ColumnName="BelPosID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="RessourceTypAg" ColumnName="RessourceTypAg" />
+                <ScalarProperty Name="RessourcenummerAg" ColumnName="RessourcenummerAg" />
+                <ScalarProperty Name="Matchcode" ColumnName="Matchcode" />
+                <ScalarProperty Name="Dimensionstext" ColumnName="Dimensionstext" />
+                <ScalarProperty Name="IstMainAGPos" ColumnName="IstMainAGPos" />
+                <ScalarProperty Name="Leistungsgrad" ColumnName="Leistungsgrad" />
+                <ScalarProperty Name="Wartezeittext" ColumnName="Wartezeittext" />
+                <ScalarProperty Name="Wartezeit" ColumnName="Wartezeit" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHKPpsRessourcenkopf">
+            <EntityTypeMapping TypeName="OLKHKEntities.KHKPpsRessourcenkopf">
+              <MappingFragment StoreEntitySet="KHKPpsRessourcenkopf">
+                <ScalarProperty Name="Artikelnummer" ColumnName="Artikelnummer" />
+                <ScalarProperty Name="Variante" ColumnName="Variante" />
+                <ScalarProperty Name="Mandant" ColumnName="Mandant" />
+                <ScalarProperty Name="Bezeichnung1" ColumnName="Bezeichnung1" />
+                <ScalarProperty Name="Bezeichnung2" ColumnName="Bezeichnung2" />
+                <ScalarProperty Name="Matchcode" ColumnName="Matchcode" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Zeichnungsnummer" ColumnName="Zeichnungsnummer" />
+                <ScalarProperty Name="VonMenge" ColumnName="VonMenge" />
+                <ScalarProperty Name="BisMenge" ColumnName="BisMenge" />
+                <ScalarProperty Name="VonDatum" ColumnName="VonDatum" />
+                <ScalarProperty Name="BisDatum" ColumnName="BisDatum" />
+                <ScalarProperty Name="IstOffen" ColumnName="IstOffen" />
+                <ScalarProperty Name="Klassenummer" ColumnName="Klassenummer" />
+                <ScalarProperty Name="IstFremdfertigung" ColumnName="IstFremdfertigung" />
+                <ScalarProperty Name="KundenKto" ColumnName="KundenKto" />
+                <ScalarProperty Name="VariantenID" ColumnName="VariantenID" />
+                <ScalarProperty Name="IstDefault" ColumnName="IstDefault" />
+                <ScalarProperty Name="Preisfindung" ColumnName="Preisfindung" />
+                <ScalarProperty Name="Variantengruppe" ColumnName="Variantengruppe" />
+                <ScalarProperty Name="Menge" ColumnName="Menge" />
+                <ScalarProperty Name="VKPreis" ColumnName="VKPreis" />
+                <ScalarProperty Name="Fertigdatum" ColumnName="Fertigdatum" />
+                <ScalarProperty Name="LieferBelID" ColumnName="LieferBelID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatIndex" ColumnName="StatIndex" />
+                <ScalarProperty Name="AuspraegungID" ColumnName="AuspraegungID" />
+                <ScalarProperty Name="DimText" ColumnName="DimText" />
+                <ScalarProperty Name="Produktionszeit" ColumnName="Produktionszeit" />
+                <ScalarProperty Name="UmrechnungsfaktorPZ" ColumnName="UmrechnungsfaktorPZ" />
+                <ScalarProperty Name="Sprache" ColumnName="Sprache" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHKPpsRessourcenPositionen">
+            <EntityTypeMapping TypeName="OLKHKEntities.KHKPpsRessourcenPositionen">
+              <MappingFragment StoreEntitySet="KHKPpsRessourcenPositionen">
+                <ScalarProperty Name="Artikelnummer" ColumnName="Artikelnummer" />
+                <ScalarProperty Name="Variante" ColumnName="Variante" />
+                <ScalarProperty Name="AuspraegungIDKopf" ColumnName="AuspraegungIDKopf" />
+                <ScalarProperty Name="Mandant" ColumnName="Mandant" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Ressourcetyp" ColumnName="Ressourcetyp" />
+                <ScalarProperty Name="Ressourcenummer" ColumnName="Ressourcenummer" />
+                <ScalarProperty Name="Arbeitsgangnummer" ColumnName="Arbeitsgangnummer" />
+                <ScalarProperty Name="Matchcode" ColumnName="Matchcode" />
+                <ScalarProperty Name="Dimensionstext" ColumnName="Dimensionstext" />
+                <ScalarProperty Name="Menge" ColumnName="Menge" />
+                <ScalarProperty Name="MengeNKS" ColumnName="MengeNKS" />
+                <ScalarProperty Name="MengeBerechnung" ColumnName="MengeBerechnung" />
+                <ScalarProperty Name="MengeDimensionen" ColumnName="MengeDimensionen" />
+                <ScalarProperty Name="Umrechnungsfaktor" ColumnName="Umrechnungsfaktor" />
+                <ScalarProperty Name="IstEinmalmenge" ColumnName="IstEinmalmenge" />
+                <ScalarProperty Name="Ruestzeittext" ColumnName="Ruestzeittext" />
+                <ScalarProperty Name="Ruestzeit" ColumnName="Ruestzeit" />
+                <ScalarProperty Name="Stueckzeittext" ColumnName="Stueckzeittext" />
+                <ScalarProperty Name="Stueckzeit" ColumnName="Stueckzeit" />
+                <ScalarProperty Name="Pufferzeittext" ColumnName="Pufferzeittext" />
+                <ScalarProperty Name="Pufferzeit" ColumnName="Pufferzeit" />
+                <ScalarProperty Name="Ueberlappungzeittext" ColumnName="Ueberlappungzeittext" />
+                <ScalarProperty Name="Ueberlappungzeit" ColumnName="Ueberlappungzeit" />
+                <ScalarProperty Name="Ueberlappungmenge" ColumnName="Ueberlappungmenge" />
+                <ScalarProperty Name="Preis" ColumnName="Preis" />
+                <ScalarProperty Name="Lagermengeneinheit" ColumnName="Lagermengeneinheit" />
+                <ScalarProperty Name="Transportzeittext" ColumnName="Transportzeittext" />
+                <ScalarProperty Name="Transportzeit" ColumnName="Transportzeit" />
+                <ScalarProperty Name="AusfuehrungsArtAG" ColumnName="AusfuehrungsArtAG" />
+                <ScalarProperty Name="AuspraegungID" ColumnName="AuspraegungID" />
+                <ScalarProperty Name="PlatzID" ColumnName="PlatzID" />
+                <ScalarProperty Name="BelPosID" ColumnName="BelPosID" />
+                <ScalarProperty Name="IstGeloescht" ColumnName="IstGeloescht" />
+                <ScalarProperty Name="IstOffen" ColumnName="IstOffen" />
+                <ScalarProperty Name="PositionExtern" ColumnName="PositionExtern" />
+                <ScalarProperty Name="PositionExternPraefix" ColumnName="PositionExternPraefix" />
+                <ScalarProperty Name="PositionExternSuffix" ColumnName="PositionExternSuffix" />
+                <ScalarProperty Name="Materialteileart" ColumnName="Materialteileart" />
+                <ScalarProperty Name="Auspraegungstyp" ColumnName="Auspraegungstyp" />
+                <ScalarProperty Name="Planzeit" ColumnName="Planzeit" />
+                <ScalarProperty Name="Planzeittext" ColumnName="Planzeittext" />
+                <ScalarProperty Name="Ueberlappungtyp" ColumnName="Ueberlappungtyp" />
+                <ScalarProperty Name="Ueberlappungprozent" ColumnName="Ueberlappungprozent" />
+                <ScalarProperty Name="MengeNach" ColumnName="MengeNach" />
+                <ScalarProperty Name="IstTextuebergabe" ColumnName="IstTextuebergabe" />
+                <ScalarProperty Name="IstCadFixPos" ColumnName="IstCadFixPos" />
+                <ScalarProperty Name="PosVariante" ColumnName="PosVariante" />
+                <ScalarProperty Name="PositionCAD" ColumnName="PositionCAD" />
+                <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+                <ScalarProperty Name="FormelID" ColumnName="FormelID" />
+                <ScalarProperty Name="DIM1" ColumnName="DIM1" />
+                <ScalarProperty Name="DIM2" ColumnName="DIM2" />
+                <ScalarProperty Name="DIM3" ColumnName="DIM3" />
+                <ScalarProperty Name="Fremdfertiger" ColumnName="Fremdfertiger" />
+                <ScalarProperty Name="SollEinzelpreis" ColumnName="SollEinzelpreis" />
+                <ScalarProperty Name="Leistungsgrad" ColumnName="Leistungsgrad" />
+                <ScalarProperty Name="RessourceTypAg" ColumnName="RessourceTypAg" />
+                <ScalarProperty Name="RessourceNummerAg" ColumnName="RessourceNummerAg" />
+                <ScalarProperty Name="PositionExternAnzeige" ColumnName="PositionExternAnzeige" />
+                <ScalarProperty Name="KapazAnzahlMax" ColumnName="KapazAnzahlMax" />
+                <ScalarProperty Name="MindestmengeAG" ColumnName="MindestmengeAG" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="amxSpCopyArtikel" FunctionName="OLKHKEntities.Store.amxSpCopyArtikel" />
+          <EntitySetMapping Name="amxImportRL">
+            <EntityTypeMapping TypeName="OLKHKEntities.amxImportRL">
+              <MappingFragment StoreEntitySet="amxImportRL">
+                <ScalarProperty Name="A42" ColumnName="A42" />
+                <ScalarProperty Name="M42" ColumnName="M42" />
+                <ScalarProperty Name="A41" ColumnName="A41" />
+                <ScalarProperty Name="M41" ColumnName="M41" />
+                <ScalarProperty Name="A40" ColumnName="A40" />
+                <ScalarProperty Name="M40" ColumnName="M40" />
+                <ScalarProperty Name="A39" ColumnName="A39" />
+                <ScalarProperty Name="M39" ColumnName="M39" />
+                <ScalarProperty Name="A38" ColumnName="A38" />
+                <ScalarProperty Name="M38" ColumnName="M38" />
+                <ScalarProperty Name="A37" ColumnName="A37" />
+                <ScalarProperty Name="M37" ColumnName="M37" />
+                <ScalarProperty Name="A36" ColumnName="A36" />
+                <ScalarProperty Name="M36" ColumnName="M36" />
+                <ScalarProperty Name="A35" ColumnName="A35" />
+                <ScalarProperty Name="M35" ColumnName="M35" />
+                <ScalarProperty Name="A34" ColumnName="A34" />
+                <ScalarProperty Name="M34" ColumnName="M34" />
+                <ScalarProperty Name="A33" ColumnName="A33" />
+                <ScalarProperty Name="M33" ColumnName="M33" />
+                <ScalarProperty Name="A32" ColumnName="A32" />
+                <ScalarProperty Name="M32" ColumnName="M32" />
+                <ScalarProperty Name="A31" ColumnName="A31" />
+                <ScalarProperty Name="M31" ColumnName="M31" />
+                <ScalarProperty Name="A30" ColumnName="A30" />
+                <ScalarProperty Name="M30" ColumnName="M30" />
+                <ScalarProperty Name="A29" ColumnName="A29" />
+                <ScalarProperty Name="M29" ColumnName="M29" />
+                <ScalarProperty Name="A28" ColumnName="A28" />
+                <ScalarProperty Name="M28" ColumnName="M28" />
+                <ScalarProperty Name="A27" ColumnName="A27" />
+                <ScalarProperty Name="M27" ColumnName="M27" />
+                <ScalarProperty Name="A26" ColumnName="A26" />
+                <ScalarProperty Name="M26" ColumnName="M26" />
+                <ScalarProperty Name="A25" ColumnName="A25" />
+                <ScalarProperty Name="M25" ColumnName="M25" />
+                <ScalarProperty Name="A24" ColumnName="A24" />
+                <ScalarProperty Name="M24" ColumnName="M24" />
+                <ScalarProperty Name="A23" ColumnName="A23" />
+                <ScalarProperty Name="M23" ColumnName="M23" />
+                <ScalarProperty Name="A22" ColumnName="A22" />
+                <ScalarProperty Name="M22" ColumnName="M22" />
+                <ScalarProperty Name="A21" ColumnName="A21" />
+                <ScalarProperty Name="M21" ColumnName="M21" />
+                <ScalarProperty Name="A20" ColumnName="A20" />
+                <ScalarProperty Name="M20" ColumnName="M20" />
+                <ScalarProperty Name="A19" ColumnName="A19" />
+                <ScalarProperty Name="M19" ColumnName="M19" />
+                <ScalarProperty Name="A18" ColumnName="A18" />
+                <ScalarProperty Name="M18" ColumnName="M18" />
+                <ScalarProperty Name="A17" ColumnName="A17" />
+                <ScalarProperty Name="M17" ColumnName="M17" />
+                <ScalarProperty Name="A16" ColumnName="A16" />
+                <ScalarProperty Name="M16" ColumnName="M16" />
+                <ScalarProperty Name="A15" ColumnName="A15" />
+                <ScalarProperty Name="M15" ColumnName="M15" />
+                <ScalarProperty Name="A14" ColumnName="A14" />
+                <ScalarProperty Name="M14" ColumnName="M14" />
+                <ScalarProperty Name="A13" ColumnName="A13" />
+                <ScalarProperty Name="M13" ColumnName="M13" />
+                <ScalarProperty Name="A12" ColumnName="A12" />
+                <ScalarProperty Name="M12" ColumnName="M12" />
+                <ScalarProperty Name="A11" ColumnName="A11" />
+                <ScalarProperty Name="M11" ColumnName="M11" />
+                <ScalarProperty Name="A10" ColumnName="A10" />
+                <ScalarProperty Name="M10" ColumnName="M10" />
+                <ScalarProperty Name="A9" ColumnName="A9" />
+                <ScalarProperty Name="M9" ColumnName="M9" />
+                <ScalarProperty Name="A8" ColumnName="A8" />
+                <ScalarProperty Name="M8" ColumnName="M8" />
+                <ScalarProperty Name="A7" ColumnName="A7" />
+                <ScalarProperty Name="M7" ColumnName="M7" />
+                <ScalarProperty Name="A6" ColumnName="A6" />
+                <ScalarProperty Name="M6" ColumnName="M6" />
+                <ScalarProperty Name="A5" ColumnName="A5" />
+                <ScalarProperty Name="M5" ColumnName="M5" />
+                <ScalarProperty Name="A4" ColumnName="A4" />
+                <ScalarProperty Name="M4" ColumnName="M4" />
+                <ScalarProperty Name="A3" ColumnName="A3" />
+                <ScalarProperty Name="M3" ColumnName="M3" />
+                <ScalarProperty Name="A2" ColumnName="A2" />
+                <ScalarProperty Name="M2" ColumnName="M2" />
+                <ScalarProperty Name="A1" ColumnName="A1" />
+                <ScalarProperty Name="M1" ColumnName="M1" />
+                <ScalarProperty Name="Matchcode" ColumnName="Matchcode" />
+                <ScalarProperty Name="Artikelnummer" ColumnName="Artikelnummer" />
+                <ScalarProperty Name="ArtikelnummerNeu" ColumnName="ArtikelnummerNeu" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHKTan">
+            <EntityTypeMapping TypeName="OLKHKEntities.KHKTan">
+              <MappingFragment StoreEntitySet="KHKTan">
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="Tan" ColumnName="Tan" />
+                <ScalarProperty Name="Mandant" ColumnName="Mandant" />
+                <ScalarProperty Name="Tabelle" ColumnName="Tabelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 using NeaUtils.Extensions.XmlExtensions;
 using SerienPlaner.Json;
 
@@ -12,31 +9,19 @@ namespace SerienPlaner.WatchData
 {
     public class WatchHandler
     {
-        private Watch _watchxml;
-        public FileInfo xmlFile;
+        public FileInfo XmlFile;
 
-        public Watch WatchXml
-        {
-            get
-            {
-                return _watchxml;
-            }
-            set
-            {
-                _watchxml = value;
-            }
-        }
+        public Watch WatchXml { get; set; }
 
         public WatchHandler()
         {
             if (WatchXml != null) return;
-            
             var appdir = NeaUtils.Application.ApplicationHelper.GetApplicationExecutionDirectory();
-            xmlFile = appdir.EnumerateFiles().FirstOrDefault(x => x.Name == "UserData.xml");
+            XmlFile = appdir.EnumerateFiles().FirstOrDefault(x => x.Name == "UserData.xml");
 
-            if (xmlFile != null) //Load the Xml Data
+            if (XmlFile != null) //Load the Xml Data
             {
-                WatchXml = new Watch().DeserializeFromFile(xmlFile.FullName);
+                WatchXml = new Watch().DeserializeFromFile(XmlFile.FullName);
             }
             else
             {
@@ -44,7 +29,7 @@ namespace SerienPlaner.WatchData
                 {
                     Series = new List<WatchSeries>()
                 };
-                xmlFile = new FileInfo(Path.Combine(appdir.FullName, "UserData.xml"));
+                XmlFile = new FileInfo(Path.Combine(appdir.FullName, "UserData.xml"));
             }
             UpdateWatch();
         }
@@ -52,21 +37,49 @@ namespace SerienPlaner.WatchData
         private void UpdateWatch()
         {
             WatchXml.Series.ForEach(x=> x.Update());
-            var data = (XmlDataProvider) MainWindow.CurrentInstance.XdataProvider;
-            WatchXml.SerializeToFile(xmlFile.FullName);
+            WatchXml.SerializeToFile(XmlFile.FullName);
         }
 
         public void AddWatch( OmdbResult sender )
         {
-            WatchXml.Series.Add(new WatchSeries(sender));
-            WatchXml.SerializeToFile(xmlFile.FullName);
+            int totalSeasons;
+            int newId = WatchXml.Series.OrderByDescending(x => x.Id).Select(x=> x.Id).FirstOrDefault();
+            newId++;
+            WatchXml.Series.Add(new WatchSeries(sender, !int.TryParse(sender.totalSeasons, out totalSeasons)) {Id = newId});
+            WatchXml.SerializeToFile(XmlFile.FullName);
         }
 
-        public void RemoveWatch(string IMDBID)
+        public void AddWatch(string Value)
         {
-            WatchSeries delseries = WatchXml.Series.Where(x => x.IMDBID == IMDBID).First();
+            WatchXml.Series.Add(new WatchSeries(Value));
+            WatchXml.SerializeToFile(XmlFile.FullName);
+        }
+
+        public void AddSeasons(string Series,int Amount)
+        {
+            for (int i = 0; i < Amount; i++)
+            {
+                WatchXml.Series.First(x => x.Title == Series).Seasons.Add(new WatchSeason() { SeasonId = i});
+            }
+        }
+
+        public void AddEpisodes(string Series, int SeasonId,int Amount)
+        {
+            for (int i = 0; i < Amount; i++)
+            {
+                WatchXml.Series.First(x => x.Title == Series).Seasons.First(x=> x.SeasonId == SeasonId).Episodes.Add(new WatchEpisode() {EpisodeId = i,EpisodeName = "Episode " + i,Imdbid = "Manuell"});
+            }
+        }
+        public void Save()
+        {
+            WatchXml.SerializeToFile(XmlFile.FullName);
+        }
+
+        public void RemoveWatch(string imdbid)
+        {
+            var delseries = WatchXml.Series.First(x => x.Imdbid == imdbid);
             WatchXml.Series.Remove(delseries);
-            WatchXml.SerializeToFile(xmlFile.FullName);
+            WatchXml.SerializeToFile(XmlFile.FullName);
         }
     }
 }

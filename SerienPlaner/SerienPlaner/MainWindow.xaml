@@ -4,31 +4,54 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SerienPlaner"
-        xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+        xmlns:microsoftWindowsThemes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:Controls="clr-namespace:SerienPlaner.Controls"
-        xmlns:watchData="clr-namespace:SerienPlaner.WatchData"
         x:Class="SerienPlaner.MainWindow"
         mc:Ignorable="d"
-        Title="Watchlist" Height="465.957" Width="838.83"  BorderThickness="0" GlowBrush="Black"
+        Title="Watchlist" Height="465.957" Width="838.83"  BorderThickness="0" GlowBrush="#CCA20025"
                       ResizeMode="CanResizeWithGrip" Background="#FF282828"  OverrideDefaultWindowCommandsBrush="White">
 
     <controls:MetroWindow.Resources>
         <local:StringToBoolConverter x:Key="StringToBoolConverter"></local:StringToBoolConverter>
-        <ContextMenu x:Key="cmseries">
+        <ContextMenu x:Key="Cmseries">
             <MenuItem Header="Delete" Click="OnSeriesDelete"></MenuItem>
+            <MenuItem Header="Edit" Click="OnSeriesEdit"></MenuItem>
         </ContextMenu>
-        <XmlDataProvider x:Key="xmldata" Source="UserData.xml" XPath="/Watch/Series" />
+        <ContextMenu x:Key="CmAddSeries">
+            <MenuItem Header="Add Series" Click="OnSeriesAdd"></MenuItem>
+        </ContextMenu>
+        <XmlDataProvider x:Key="Xmldata" Source="UserData.xml" XPath="/Watch/Series" />
         <!--Series Header-->
         <HierarchicalDataTemplate DataType="Series" ItemsSource="{Binding XPath=./*}">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="0" Text="Series" />
+            <StackPanel Orientation="Horizontal" ContextMenu="{StaticResource CmAddSeries}" Background="Transparent">
+                <TextBlock Margin="0" Text="Series"/>
             </StackPanel>
         </HierarchicalDataTemplate>
         <!--Serien Leaf -->
-        <HierarchicalDataTemplate DataType="WatchSeries" ItemsSource="{Binding XPath=./Seasons/*}">
-            <StackPanel Orientation="Horizontal" >
-                <TextBlock Margin="5,0,0,0" Text="{Binding XPath=@Title}" ContextMenu="{StaticResource cmseries}" />
+        <HierarchicalDataTemplate  DataType="WatchSeries" ItemsSource="{Binding XPath=./Seasons/*}">
+            <StackPanel Orientation="Horizontal" Background="Transparent" ContextMenu="{StaticResource Cmseries}">
+                <CheckBox IsHitTestVisible="False" Background="Transparent" BorderBrush="Transparent" Visibility="Visible" Margin="0,0,0,0" IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}" >
+                    <CheckBox.Style>
+                        <Style BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="{x:Type CheckBox}">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="true">
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <TextBlock Margin="0,0,0,0" Text="{Binding XPath=@Title}">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding XPath=@IsManual, Converter={StaticResource StringToBoolConverter}}" Value="true">
+                                    <Setter Property="TreeViewItem.FontStyle" Value="Italic" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
             </StackPanel>
         </HierarchicalDataTemplate>
         <!--Season Leaf -->
@@ -42,7 +65,7 @@
         <!--Episode Leaf -->
         <HierarchicalDataTemplate DataType="WatchEpisode">
             <StackPanel Orientation="Horizontal">
-                <CheckBox Margin="0,0,0,0" Checked="EpisodeCheckChanged" Unchecked="EpisodeCheckChanged"  IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}"></CheckBox>
+                <CheckBox Margin="0,0,0,0" Checked="EpisodeCheckChanged" Unchecked="EpisodeCheckChanged" IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}"></CheckBox>
                 <TextBlock Margin="0" Text="Episode " />
                 <TextBlock Margin="0,0,0,0" Text="{Binding XPath=@EpisodeId}" />
                 <TextBlock Margin="4,0,0,0" Text="{Binding XPath=@EpisodeName}" />
@@ -55,6 +78,7 @@
             <GradientStop Color="#E2E3EA" Offset="0.07"/>
             <GradientStop Color="#E3E9EF" Offset="1"/>
         </LinearGradientBrush>
+
         <Style x:Key="TextBoxStyle1" BasedOn="{x:Null}" TargetType="{x:Type TextBox}">
             <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
             <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
@@ -66,9 +90,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Microsoft_Windows_Themes:ListBoxChrome x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" RenderMouseOver="{TemplateBinding IsMouseOver}">
+                        <microsoftWindowsThemes:ListBoxChrome x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" RenderFocused="{TemplateBinding IsKeyboardFocusWithin}" RenderMouseOver="{TemplateBinding IsMouseOver}">
                             <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,0,20,0"/>
-                        </Microsoft_Windows_Themes:ListBoxChrome>
+                        </microsoftWindowsThemes:ListBoxChrome>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
@@ -79,32 +103,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="BingButton" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid Margin="0" x:Name="RootElement">
-                            <Rectangle Margin="0,2,4,2" Stroke="#FF000000" StrokeThickness="0" RadiusX="2.5" RadiusY="2.5">
-                                <Rectangle.Fill>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="#FFFCAA24" Offset="0" />
-                                        <GradientStop Color="#FFFF860A" Offset="1" />
-                                    </LinearGradientBrush>
-                                </Rectangle.Fill>
-                            </Rectangle>
-                            <Ellipse Height="9.584" Margin="0,5.288,7.035,0" VerticalAlignment="Top" Stroke="#FFFFFFFF" StrokeThickness="2" Width="9.584" HorizontalAlignment="Right"/>
-                            <Path Height="5.182" HorizontalAlignment="Left" Margin="3.03,0,0,4.364" VerticalAlignment="Bottom" Width="5.096" Fill="#FFFFFFFF" Stretch="Fill" Stroke="#FFFFFFFF" StrokeThickness="2" Data="M14.097251,19.182762 L8.7665224,24.552877" d:LayoutOverrides="HorizontalAlignment, VerticalAlignment"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </controls:MetroWindow.Resources>
     <controls:MetroWindow.IconEdgeMode>
         <EdgeMode>Aliased</EdgeMode>
     </controls:MetroWindow.IconEdgeMode>
 
-    <Grid Name="MainGrid" DataContext="{StaticResource xmldata}">
+    <Grid Name="MainGrid" DataContext="{StaticResource Xmldata}">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="Row1" Height="27"/>
             <RowDefinition x:Name="Row2" Height="292*"  />
@@ -121,13 +125,23 @@
         <Label x:Name="label" Grid.Row="0" Grid.Column="0" Content="My Watch" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center"/>
         <TreeView Grid.Column="0"  x:Name="treeView" Margin="0,0,0,10" Grid.Row="1" ItemsSource="{Binding}"
                   VirtualizingStackPanel.IsVirtualizing="False"
-                  VirtualizingStackPanel.VirtualizationMode="Standard" SelectedItemChanged="TreeView_OnSelectedItemChanged" />
+                  VirtualizingStackPanel.VirtualizationMode="Standard" SelectedItemChanged="TreeView_OnSelectedItemChanged">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Name}" Value="Series">
+                            <Setter Property="IsExpanded" Value="True" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" Grid.Row="0" >
             <Grid>
                 <Label Content="Search:" HorizontalAlignment="Left" Width="49" />
                 <TextBox VerticalAlignment="Center" Height="26" Style="{DynamicResource TextBoxStyle1}" Background="#FFC9C9C9" x:Name="tbSearch" TabIndex="0" Margin="49,0,0,-1"/>
             </Grid>
         </Border>
-        <Controls:Series x:Name="seriesControl" Grid.Column="2" Grid.Row="1" WatchClicked="SeriesControl_OnWatchClicked"/>
+        <local:Series x:Name="seriesControl" Grid.Column="2" Grid.Row="1" WatchClicked="SeriesControl_OnWatchClicked"/>
     </Grid>
 </controls:MetroWindow>

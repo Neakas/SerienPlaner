@@ -16,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SerienPlaner.Json;
 
-namespace SerienPlaner.Controls
+namespace SerienPlaner
 {
     /// <summary>
     /// Interaction logic for Series.xaml

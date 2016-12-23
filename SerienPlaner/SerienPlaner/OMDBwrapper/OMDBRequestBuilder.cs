@@ -16,8 +16,6 @@ namespace SerienPlaner.OMDBwrapper
             }
         }
 
-        private string Searchstring { get; set; }
-
         private TypeOfSearch _typeOfSearch;
 
         public TypeOfSearch TypeOfSearch
@@ -106,10 +104,10 @@ namespace SerienPlaner.OMDBwrapper
                 default:
                     throw new ArgumentOutOfRangeException(nameof(requestBy), requestBy, null);
             }
-            
             PlotType = plotType;
             TypeOfSearch = typeOfSearch;
             ReturnFormat = returnformat;
+            Episode = 1;
         }
 
         public OmdbRequestBuilder(string search, int season, PlotType plotType = PlotType.Short, TypeOfSearch typeOfSearch = TypeOfSearch.Series, ReturnType returnformat = ReturnType.Json)
