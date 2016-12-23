@@ -56,7 +56,7 @@ namespace SerienPlaner.WatchData
             {
                 episodeList = new ObservableCollection<WatchEpisode>();
             }
-            episoderesult.Episodes.ForEach(x =>
+            episoderesult.Episodes?.ForEach(x =>
             {
                 if (episodeList.Any(y => y.Imdbid == x.imdbID))
                     return;
