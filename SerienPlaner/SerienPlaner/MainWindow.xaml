@@ -8,7 +8,7 @@
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         x:Class="SerienPlaner.MainWindow"
         mc:Ignorable="d"
-        Title="Watchlist" Height="465.957" Width="838.83"  BorderThickness="0" GlowBrush="#CCA20025"
+        Title="WatchList" Height="465.957" Width="838.83"  BorderThickness="0" GlowBrush="#CCA20025"
                       ResizeMode="CanResizeWithGrip" Background="#FF282828"  OverrideDefaultWindowCommandsBrush="White">
 
     <controls:MetroWindow.Resources>
