@@ -63,6 +63,7 @@ namespace SerienPlaner
         private void SeriesControl_OnWatchClicked( object sender, RoutedEventArgs e )
         {
             _watchHandler.AddWatch((OmdbResult)sender);
+            _watchHandler.Save();
             XdataProvider.Refresh();
         }
 
