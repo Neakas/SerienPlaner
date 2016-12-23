@@ -143,7 +143,7 @@ namespace SerienPlaner.Windows
             Series.Refresh();
             lbSeasons.Items.Refresh();
             lbEpisodes.Items.Refresh();
-            WatchSeason season = (WatchSeason) lbSeasons.SelectedItem;
+            var season = (WatchSeason) lbSeasons.SelectedItem;
             lbSeasons.SelectedItem = null;
             lbSeasons.SelectedItem = season;
         }
