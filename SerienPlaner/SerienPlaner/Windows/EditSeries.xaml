@@ -37,7 +37,22 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock VerticalAlignment="Center" Text="Episode " />
-                                <TextBlock VerticalAlignment="Center" Text="{Binding EpisodeId}" />
+                                <TextBox VerticalAlignment="Center" Text="{Binding EpisodeId}" VerticalContentAlignment="Center" BorderBrush="Transparent" Background="Transparent" IsManipulationEnabled="False" MouseDoubleClick="Control_OnMouseDoubleClick">
+                                    <TextBox.Style>
+                                        <Style BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+                                            <Setter Property="Foreground" Value="White"></Setter>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding EpisodeId}" Value="null">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding EpisodeId}" Value="0">
+                                                    <Setter Property="Foreground" Value="Red" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                                
                                 <TextBlock VerticalAlignment="Center" Text=":" />
                                 <TextBox Text="{Binding EpisodeName}" VerticalContentAlignment="Center" BorderBrush="Transparent" Background="Transparent" IsManipulationEnabled="False" MouseDoubleClick="Control_OnMouseDoubleClick" />
                             </StackPanel>
@@ -46,7 +61,10 @@
                 </ListBox>
                 <Label   x:Name="label1"  Content="Episodes" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                 <Button IsEnabled="False"  x:Name="btAddEpisodes" Click="BtAddEpisodes_OnClick"  Content="+"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,36,10,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="26"/>
-                <Button IsEnabled="False"  x:Name="btRemoveEpisodes"  Content="-"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,66,10,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="26"/>
+                <Button IsEnabled="False"  x:Name="btRemoveEpisodes"  Content="-"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,66,10,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="26" Click="btRemoveEpisodes_Click"/>
+                <Button IsEnabled="False"  x:Name="btUp" Click="BtUp_OnClick"  Content="&#x25B2;"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,96,10,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="26"/>
+                <Button IsEnabled="False"  x:Name="btDown"  Content="&#x25BC;"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,126,10,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="26" Click="btDown_Click"/>
+                <Button IsEnabled="False"  x:Name="btAutoFill" Content="A" ToolTip="Smart-Auto-Fill Missing Episodes"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0,249,10,0" Height="21" VerticalAlignment="Top" HorizontalAlignment="Right" Width="26" Click="BtAutoFill_OnClick"/>
             </Grid>
         </Border>
     </Grid>

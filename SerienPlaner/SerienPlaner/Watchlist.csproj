@@ -87,6 +87,7 @@
       <DependentUpon>Series.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\StringToBoolConverter.cs" />
+    <Compile Include="Converter\TextBlockForegroundConverter.cs" />
     <Compile Include="Json\OmdbResult.cs" />
     <Compile Include="OMDBwrapper\OMDBSuggestionProvider.cs" />
     <Compile Include="WatchData\Watch.cs" />

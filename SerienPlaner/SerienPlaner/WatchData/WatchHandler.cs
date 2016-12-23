@@ -40,6 +40,11 @@ namespace SerienPlaner.WatchData
             WatchXml.SerializeToFile(XmlFile.FullName);
         }
 
+        public void RefreshWatch()
+        {
+            WatchXml.Series.ForEach(x=> x.Refresh());
+        }
+
         public void AddWatch( OmdbResult sender )
         {
             int totalSeasons;

@@ -71,21 +71,41 @@ namespace SerienPlaner
         private void OnSeriesDelete(object sender, RoutedEventArgs e)
         {
             var imdbid = ((XmlElement) ((MenuItem) e.Source).DataContext).Attributes["Imdbid"].Value;
-            _watchHandler.RemoveWatch(imdbid);
-            XdataProvider.Refresh();
+            var result =
+                MessageBox.Show(
+                    "Are you Sure you want to Delete your Watch for '" +
+                    ((XmlElement) ((MenuItem) e.Source).DataContext).Attributes["Title"].Value + "'", "Warning",
+                    MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            switch (result)
+            {
+                case MessageBoxResult.None:
+                    break;
+                case MessageBoxResult.OK:
+                    break;
+                case MessageBoxResult.Cancel:
+                    break;
+                case MessageBoxResult.Yes:
+                    _watchHandler.RemoveWatch(imdbid);
+                    XdataProvider.Refresh();
+                    break;
+                case MessageBoxResult.No:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var imdbid = ((XmlElement)e.NewValue).Attributes["Imdbid"]?.Value ?? "";
+            var imdbid = ((XmlElement) e.NewValue).Attributes["Imdbid"]?.Value ?? "";
             if (imdbid == "") return;
             OmdbLookup2View(new OmdbRequestBuilder(imdbid, RequestBy.ImdbId, PlotType.Full));
         }
 
         private void EpisodeCheckChanged(object sender, RoutedEventArgs e)
         {
-            var episodeElement = (XmlElement)((CheckBox)e.Source).DataContext;
-            var seasonElement = (XmlElement)episodeElement?.ParentNode?.ParentNode;
+            var episodeElement = (XmlElement) ((CheckBox) e.Source).DataContext;
+            var seasonElement = (XmlElement) episodeElement?.ParentNode?.ParentNode;
             if (((CheckBox) sender).IsChecked == false)
             {
                 seasonElement?.SetAttribute("Watched", "false");
@@ -100,7 +120,7 @@ namespace SerienPlaner
 
         private void SeasonCheckChanged(object sender, RoutedEventArgs e)
         {
-            var seasonElement = (XmlElement)((CheckBox)e.Source).DataContext;
+            var seasonElement = (XmlElement) ((CheckBox) e.Source).DataContext;
             if (((CheckBox) sender).IsFocused)
             {
                 if (((CheckBox) sender).IsChecked == true)
@@ -121,7 +141,7 @@ namespace SerienPlaner
                 }
             }
 
-            var seriesElement = ((XmlElement)seasonElement?.ParentNode?.ParentNode);
+            var seriesElement = ((XmlElement) seasonElement?.ParentNode?.ParentNode);
             var seasonelementlist = new List<XmlNode>(seriesElement?.FirstChild?.ChildNodes.Cast<XmlNode>());
             if (seasonelementlist.All(x => x.Attributes["Watched"].Value == "true")) seriesElement.SetAttribute("Watched", "true");
             else seriesElement.SetAttribute("Watched", "false");
@@ -149,7 +169,6 @@ namespace SerienPlaner
                 }
                 seriesControl.OmdbResultObj = root;
                 seriesControl.imgPoster.Source = bitmap;
-
             }
             catch (Exception)
             {
@@ -163,18 +182,23 @@ namespace SerienPlaner
             aiw.ShowDialog();
             _watchHandler.AddWatch(aiw.InputValue);
             XdataProvider.Refresh();
-
         }
 
         private void OnSeriesEdit(object sender, RoutedEventArgs e)
         {
-            var seriesElement = (XmlElement)((MenuItem)e.Source).DataContext;
+            var seriesElement = (XmlElement) ((MenuItem) e.Source).DataContext;
             var Id = int.Parse(seriesElement.Attributes["Id"].Value);
             EditSeries es = new EditSeries(_watchHandler.WatchXml.Series.First(x => x.Id == Id));
             es.ShowDialog();
             _watchHandler.Save();
             XdataProvider.Refresh();
+        }
 
+        public void UpdateDataSet()
+        {
+            _watchHandler.RefreshWatch();
+            _watchHandler.Save();
+            XdataProvider.Refresh();
         }
     }
 }

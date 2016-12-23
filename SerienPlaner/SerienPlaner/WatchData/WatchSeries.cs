@@ -105,6 +105,14 @@ namespace SerienPlaner.WatchData
             if(omdbResult != null)  Seasons = FindSeasons(omdbResult.imdbID, int.Parse(omdbResult.totalSeasons));
         }
 
+        public void Refresh()
+        {
+            foreach (var season in Seasons)
+            {
+                season.Episodes = new ObservableCollection<WatchEpisode>(season.Episodes.OrderBy(x => x.EpisodeId));
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
