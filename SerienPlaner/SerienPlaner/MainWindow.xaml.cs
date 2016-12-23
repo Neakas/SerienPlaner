@@ -105,8 +105,11 @@ namespace SerienPlaner
 
         private void EpisodeCheckChanged(object sender, RoutedEventArgs e)
         {
+             //TODO: Problem ist, das die Werte direkt im XMl angepasst werden, anstatt in den an das Xml gebunden WatchEpisode XML. Dabei wird die XMl Aktualisiert, die Objekte im Watchhandler aber noch nicht.
             var episodeElement = (XmlElement) ((CheckBox) e.Source).DataContext;
             var seasonElement = (XmlElement) episodeElement?.ParentNode?.ParentNode;
+            var seriesElement = (XmlElement) seasonElement?.ParentNode?.ParentNode;
+
             if (((CheckBox) sender).IsChecked == false)
             {
                 seasonElement?.SetAttribute("Watched", "false");
@@ -121,6 +124,7 @@ namespace SerienPlaner
 
         private void SeasonCheckChanged(object sender, RoutedEventArgs e)
         {
+            //TODO: Problem ist, das die Werte direkt im XMl angepasst werden, anstatt in den an das Xml gebunden WatchEpisode XML. Dabei wird die XMl Aktualisiert, die Objekte im Watchhandler aber noch nicht.
             var seasonElement = (XmlElement) ((CheckBox) e.Source).DataContext;
             if (((CheckBox) sender).IsFocused)
             {
