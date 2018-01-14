@@ -3,16 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SerienPlaner"
         xmlns:microsoftWindowsThemes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-        x:Class="SerienPlaner.MainWindow"
+        xmlns:controls1="clr-namespace:Watchlist.Controls"
+        xmlns:converter="clr-namespace:Watchlist.Converter"
+        xmlns:tvdb="clr-namespace:TVDBSharp.Models;assembly=TVDBSharp"
+        xmlns:local="clr-namespace:Watchlist"
+        x:Class="Watchlist.MainWindow"
         mc:Ignorable="d"
         Title="WatchList" Height="465.957" Width="838.83"  BorderThickness="0" GlowBrush="#CCA20025"
                       ResizeMode="CanResizeWithGrip" Background="#FF282828"  OverrideDefaultWindowCommandsBrush="White">
 
     <controls:MetroWindow.Resources>
-        <local:StringToBoolConverter x:Key="StringToBoolConverter"></local:StringToBoolConverter>
+        <converter:StringToBoolConverter x:Key="StringToBoolConverter"></converter:StringToBoolConverter>
         <ContextMenu x:Key="Cmseries">
             <MenuItem Header="Delete" Click="OnSeriesDelete"></MenuItem>
             <MenuItem Header="Edit" Click="OnSeriesEdit"></MenuItem>
@@ -20,15 +23,59 @@
         <ContextMenu x:Key="CmAddSeries">
             <MenuItem Header="Add Series" Click="OnSeriesAdd"></MenuItem>
         </ContextMenu>
-        <XmlDataProvider x:Key="Xmldata" Source="UserData.xml" XPath="/Watch/Series" />
-        <!--Series Header-->
-        <HierarchicalDataTemplate DataType="Series" ItemsSource="{Binding XPath=./*}">
+        <XmlDataProvider x:Key="Xmldata" Source="UserData.xml" XPath="Watch/Series/WatchSeries" />
+
+
+        <HierarchicalDataTemplate DataType="WatchSeries" ItemsSource="{Binding XPath=Show/Seasons/*}">
+            <StackPanel Orientation="Horizontal" Background="Transparent" ContextMenu="{StaticResource Cmseries}">
+                <CheckBox IsHitTestVisible="false" Background="Transparent" BorderBrush="Transparent" Visibility="Visible" Margin="0,0,0,0" IsChecked="{Binding XPath=Show/@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}" >
+                    <CheckBox.Style>
+                        <Style BasedOn="{StaticResource {x:Type CheckBox}}" TargetType="{x:Type CheckBox}">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="true">
+                                    <Setter Property="Visibility" Value="Hidden" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </CheckBox.Style>
+                </CheckBox>
+                <TextBlock Margin="0,0,0,0" Text="{Binding XPath=Show/@Name}">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding XPath=@IsManual, Converter={StaticResource StringToBoolConverter}}" Value="true">
+                                    <Setter Property="TreeViewItem.FontStyle" Value="Italic" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate DataType="Season" ItemsSource="{Binding XPath=Episodes/*}">
             <StackPanel Orientation="Horizontal" ContextMenu="{StaticResource CmAddSeries}" Background="Transparent">
-                <TextBlock Margin="0" Text="Series"/>
+                <!--<TextBlock Text="{Binding XPath=SeasonNumber}"/>-->
+                <StackPanel Orientation="Horizontal">
+                    <CheckBox Margin="0,0,0,0" Checked="SeasonCheckChanged" Unchecked="SeasonCheckChanged"  IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}"></CheckBox>
+                    <TextBlock Margin="0" Text="Season " />
+                    <TextBlock Margin="0,0,0,0" Text="{Binding XPath=SeasonNumber}" />
+                </StackPanel>
             </StackPanel>
         </HierarchicalDataTemplate>
-        <!--Serien Leaf -->
-        <HierarchicalDataTemplate  DataType="WatchSeries" ItemsSource="{Binding XPath=./Seasons/*}">
+
+        <HierarchicalDataTemplate DataType="Episode">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Margin="0,0,0,0" Checked="EpisodeCheckChanged" Unchecked="EpisodeCheckChanged" IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}"></CheckBox>
+                <TextBlock Margin="0" Text="Episode " />
+                <TextBlock Margin="0,0,0,0" Text="{Binding XPath=EpisodeNumber}" />
+                <TextBlock Margin="4,0,0,0" Text="{Binding XPath=Title}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+        <!--<HierarchicalDataTemplate DataType="watchData:Watch" ItemsSource="{Binding XPath=./WatchSeries/Show/*}">-->
+        <!--<HierarchicalDataTemplate DataType="Show" >
             <StackPanel Orientation="Horizontal" Background="Transparent" ContextMenu="{StaticResource Cmseries}">
                 <CheckBox IsHitTestVisible="False" Background="Transparent" BorderBrush="Transparent" Visibility="Visible" Margin="0,0,0,0" IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}" >
                     <CheckBox.Style>
@@ -53,24 +100,25 @@
                     </TextBlock.Style>
                 </TextBlock>
             </StackPanel>
-        </HierarchicalDataTemplate>
-        <!--Season Leaf -->
-        <HierarchicalDataTemplate DataType="WatchSeason"  ItemsSource="{Binding XPath=./Episodes/*}">
+        </HierarchicalDataTemplate>-->
+        <!--Season Leaf --><!--
+        <HierarchicalDataTemplate DataType="watchData:WatchSeason"  ItemsSource="{Binding XPath=./Episodes/*}">
             <StackPanel Orientation="Horizontal">
                 <CheckBox Margin="0,0,0,0" Checked="SeasonCheckChanged" Unchecked="SeasonCheckChanged"  IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}"></CheckBox>
                 <TextBlock Margin="0" Text="Season " />
                 <TextBlock Margin="0,0,0,0" Text="{Binding XPath=@SeasonId}" />
             </StackPanel>
         </HierarchicalDataTemplate>
-        <!--Episode Leaf -->
-        <HierarchicalDataTemplate DataType="WatchEpisode">
+        --><!--Episode Leaf --><!--
+        <HierarchicalDataTemplate DataType="watchData:WatchEpisode">
             <StackPanel Orientation="Horizontal">
                 <CheckBox Margin="0,0,0,0" Checked="EpisodeCheckChanged" Unchecked="EpisodeCheckChanged" IsChecked="{Binding XPath=@Watched, Converter={StaticResource StringToBoolConverter}, Mode=TwoWay}"></CheckBox>
                 <TextBlock Margin="0" Text="Episode " />
                 <TextBlock Margin="0,0,0,0" Text="{Binding XPath=@EpisodeId}" />
                 <TextBlock Margin="4,0,0,0" Text="{Binding XPath=@EpisodeName}" />
             </StackPanel>
-        </HierarchicalDataTemplate>
+        </HierarchicalDataTemplate>-->
+        
 
 
         <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
@@ -108,10 +156,11 @@
         <EdgeMode>Aliased</EdgeMode>
     </controls:MetroWindow.IconEdgeMode>
 
-    <Grid Name="MainGrid" DataContext="{StaticResource Xmldata}">
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="Row1" Height="27"/>
-            <RowDefinition x:Name="Row2" Height="292*"  />
+            <RowDefinition x:Name="Row2" Height="125*"  />
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <!--<ColumnDefinition x:Name="Col1" MinWidth="100" Width="100*"/>
@@ -120,16 +169,21 @@
             <ColumnDefinition Width="4" />
             <ColumnDefinition Width="306*" />
         </Grid.ColumnDefinitions>
-        <GridSplitter Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" Background="#CCA20025" />
+        <GridSplitter Grid.Column="1" Grid.RowSpan="3" HorizontalAlignment="Stretch" Background="#CCA20025" />
 
-        <Label x:Name="label" Grid.Row="0" Grid.Column="0" Content="My Watch" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center"/>
-        <TreeView Grid.Column="0"  x:Name="treeView" Margin="0,0,0,10" Grid.Row="1" ItemsSource="{Binding}"
-                  VirtualizingStackPanel.IsVirtualizing="False"
-                  VirtualizingStackPanel.VirtualizationMode="Standard" SelectedItemChanged="TreeView_OnSelectedItemChanged">
+        <Label x:Name="Label" Grid.Row="0" Grid.Column="0" Content="My Watch" BorderBrush="Black" BorderThickness="1" HorizontalContentAlignment="Center"/>
+        <TreeView Grid.Column="0"  x:Name="TreeView" Margin="0,0,0,10" Grid.Row="1"
+                  VirtualizingStackPanel.IsVirtualizing="False" 
+                  VirtualizingStackPanel.VirtualizationMode="Standard" ItemsSource="{Binding Source={StaticResource Xmldata}}" SelectedItemChanged="TreeView_OnSelectedItemChanged">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding Name}" Value="Series">
+                        <DataTrigger Value="Series">
+                            <DataTrigger.Binding>
+                                <Binding>
+                                    <Binding.Path>Name</Binding.Path>
+                                </Binding>
+                            </DataTrigger.Binding>
                             <Setter Property="IsExpanded" Value="True" />
                         </DataTrigger>
                     </Style.Triggers>
@@ -139,9 +193,11 @@
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" Grid.Row="0" >
             <Grid>
                 <Label Content="Search:" HorizontalAlignment="Left" Width="49" />
-                <TextBox VerticalAlignment="Center" Height="26" Style="{DynamicResource TextBoxStyle1}" Background="#FFC9C9C9" x:Name="tbSearch" TabIndex="0" Margin="49,0,0,-1"/>
+                <TextBox VerticalAlignment="Center" Height="26" Style="{DynamicResource TextBoxStyle1}" Background="#FFC9C9C9" x:Name="TbSearch" TabIndex="0" Margin="49,0,0,-1"/>
             </Grid>
         </Border>
-        <local:Series x:Name="seriesControl" Grid.Column="2" Grid.Row="1" WatchClicked="SeriesControl_OnWatchClicked"/>
+        <Grid x:Name="SeriesControlGrid" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2"/>
+        <Label Name="lblConState" Content="Connecting" Grid.Row="2" Foreground="Red"></Label>
     </Grid>
 </controls:MetroWindow>
+

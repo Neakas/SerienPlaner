@@ -1,0 +1,47 @@
+﻿<mah:MetroWindow x:Class="Watchlist.Controls.SearchControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:Watchlist.Controls"
+             mc:Ignorable="d" 
+             Background="Black" d:DesignHeight ="446.802" d:DesignWidth="645.951" >
+    <Window.Resources>
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="2.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Background="Black" Name="dgDataList" Grid.ColumnSpan="1" Grid.RowSpan="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="First Aired" Binding="{Binding FirstAired}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Network" Binding="{Binding Network}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True"></DataGridTextColumn>
+                <DataGridTextColumn Header="Id" Binding="{Binding }" IsReadOnly="True"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <GridSplitter Grid.Column="1" Grid.RowSpan="1"  Background="#CCA20025" />
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="245*"/>
+                <RowDefinition Height="88*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Name="imgPoster" Stretch="Uniform" ></Image>
+            <TextBlock Grid.Row="1" Name="tbOverview"  TextWrapping="Wrap"  ></TextBlock>
+
+
+        </Grid>
+
+        <Image Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Name="imgbanner"></Image>
+    </Grid>
+</mah:MetroWindow>

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 
-namespace SerienPlaner.WatchData
+namespace Watchlist.WatchData
 {
     public class WatchEpisode : INotifyPropertyChanged
     {
@@ -17,9 +17,6 @@ namespace SerienPlaner.WatchData
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

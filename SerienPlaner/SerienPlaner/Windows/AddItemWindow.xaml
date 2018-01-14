@@ -1,12 +1,12 @@
-﻿<controls:MetroWindow x:Class="SerienPlaner.Windows.AddItemWindow"
+﻿<controls:MetroWindow x:Class="Watchlist.Windows.AddItemWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SerienPlaner.Windows"
+        xmlns:local="clr-namespace:Watchlist.Windows"
         xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:microsoftWindowsThemes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
-        xmlns:serienPlaner="clr-namespace:SerienPlaner"
+        xmlns:serienPlaner="clr-namespace:Watchlist"
         mc:Ignorable="d"
         Title="{Binding}" Height="104.184" Width="300" ResizeMode="NoResize" Background="#FF282828" BorderThickness="2" GlowBrush="#CCA20025">
     <Grid>

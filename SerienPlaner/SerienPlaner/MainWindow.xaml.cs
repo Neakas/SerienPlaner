@@ -1,21 +1,33 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using System.Xml;
-using SerienPlaner.OMDBwrapper;
+using System.Xml.Serialization;
 using dragonz.actb.core;
-using NeaUtils.Extensions.XmlExtensions;
-using SerienPlaner.Json;
-using SerienPlaner.WatchData;
-using SerienPlaner.Windows;
+using Watchlist.Json;
+using Watchlist.OMDBwrapper;
+using Watchlist.WatchData;
+using Watchlist.Windows;
+using Newtonsoft.Json;
+using TVDBSharp;
+using TVDBSharp.Models;
+using TVDBSharp.Models.Enums;
+using Watchlist.Controls;
+using Watchlist.TvDbwrapper;
+using Watchlist.TvDbwrapper.JsonClasses;
+using System.Threading.Tasks;
 
-namespace SerienPlaner
+namespace Watchlist
 {
     public partial class MainWindow
     {
@@ -23,23 +35,23 @@ namespace SerienPlaner
         private readonly WatchHandler _watchHandler;
         public XmlDataProvider XdataProvider;
         public static MainWindow CurrentInstance;
+        public TVDB tvdbhandler;
         public MainWindow()
         {
             CurrentInstance = this;
             InitializeComponent();
+            tvdbhandler = new TVDB("517C3F261F6A0C96");
+            
             XdataProvider = (XmlDataProvider)FindResource("Xmldata");
             _watchHandler = new WatchHandler();
+
             InitControls();
         }
 
         private void InitControls()
         {
-            _acmOmdb = new AutoCompleteManager(tbSearch)
-            {
-                DataProvider = new OmdbSuggestionProvider(),
-                Asynchronous = true
-            };
-            tbSearch.KeyDown += tbSearch_KeyDown;
+           
+            TbSearch.KeyDown += tbSearch_KeyDown;
         }
 
         private void tbSearch_KeyDown( object sender, KeyEventArgs e )
@@ -50,19 +62,20 @@ namespace SerienPlaner
             }
             try
             {
-                var result = ((OmdbResult)_acmOmdb.DataProvider.ResultObject).Search.First(x => ((TextBox)sender).Text == x.Title);
+                var results = tvdbhandler.Search(TbSearch.Text, 10);
+                SearchControl ctrl = new SearchControl(results);
+                ctrl.ShowDialog();
 
-                OmdbLookup2View(new OmdbRequestBuilder(result.Title, RequestBy.Title, PlotType.Full));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // ignored
             }
         }
 
-        private void SeriesControl_OnWatchClicked( object sender, RoutedEventArgs e )
+        public void SeriesControl_OnWatchClicked( Show show )
         {
-            _watchHandler.AddWatch((OmdbResult)sender);
+            _watchHandler.AddWatch(show);
             _watchHandler.Save();
             XdataProvider.Refresh();
         }
@@ -71,8 +84,8 @@ namespace SerienPlaner
 
         private void OnSeriesDelete(object sender, RoutedEventArgs e)
         {
-            var imdbid = ((XmlElement) ((MenuItem) e.Source).DataContext).Attributes["Imdbid"].Value;
-            var result =
+            string imdbid = ((XmlElement) ((MenuItem) e.Source).DataContext).Attributes["Imdbid"].Value;
+            MessageBoxResult result =
                 MessageBox.Show(
                     "Are you Sure you want to Delete your Watch for '" +
                     ((XmlElement) ((MenuItem) e.Source).DataContext).Attributes["Title"].Value + "'", "Warning",
@@ -96,11 +109,32 @@ namespace SerienPlaner
             }
         }
 
-        private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private  void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var imdbid = ((XmlElement) e.NewValue).Attributes["Imdbid"]?.Value ?? "";
-            if (imdbid == "") return;
-            OmdbLookup2View(new OmdbRequestBuilder(imdbid, RequestBy.ImdbId, PlotType.Full));
+            XmlElement node = ((XmlElement)e.NewValue);
+            if (node == null ) return;
+
+            SeriesControlGrid.Children.Clear();
+
+            if (node.Name == "WatchSeries")
+            {
+                
+                var shownode = node.SelectSingleNode("Show");
+                Show selectedShow = shownode.ToType<Show>();
+
+                ShowControl seriesctrl = new ShowControl(selectedShow);
+                SeriesControlGrid.Children.Add(seriesctrl);
+            }
+            if (node.Name == "Episode")
+            {
+                Episode selectedEpisode = node.ToType<Episode>();
+                EpisodeControl episodectrl = new EpisodeControl(selectedEpisode);
+                SeriesControlGrid.Children.Add(episodectrl);
+            }
+            //seriesctrl.imgPoster.LoadImage();
+            //string imdbid = ((XmlElement) e.NewValue).Attributes["Imdbid"]?.Value ?? "";
+            //if (imdbid == "") return;
+            //OmdbLookup2View(new TvDbRequestBuilder(imdbid, RequestBy.ImdbId, PlotType.Full));
         }
 
         private void EpisodeCheckChanged(object sender, RoutedEventArgs e)
@@ -108,7 +142,6 @@ namespace SerienPlaner
              //TODO: Problem ist, das die Werte direkt im XMl angepasst werden, anstatt in den an das Xml gebunden WatchEpisode XML. Dabei wird die XMl Aktualisiert, die Objekte im Watchhandler aber noch nicht.
             var episodeElement = (XmlElement) ((CheckBox) e.Source).DataContext;
             var seasonElement = (XmlElement) episodeElement?.ParentNode?.ParentNode;
-            var seriesElement = (XmlElement) seasonElement?.ParentNode?.ParentNode;
 
             if (((CheckBox) sender).IsChecked == false)
             {
@@ -116,8 +149,11 @@ namespace SerienPlaner
             }
             else
             {
-                var episodeelementlist = new List<XmlNode>(seasonElement?.FirstChild?.ChildNodes.Cast<XmlNode>());
-                if (episodeelementlist.All(x => x.Attributes["Watched"].Value == "true")) seasonElement.SetAttribute("Watched", "true");
+                if (seasonElement?.LastChild != null)
+                {
+                    var episodeelementlist = new List<XmlNode>(seasonElement.LastChild.ChildNodes.Cast<XmlNode>());
+                    if (episodeelementlist.All(x => x.Attributes?["Watched"].Value == "true")) seasonElement.SetAttribute("Watched", "true");
+                }
             }
             XdataProvider.Document.Save("UserData.xml");
         }
@@ -131,7 +167,7 @@ namespace SerienPlaner
                 if (((CheckBox) sender).IsChecked == true)
                 {
                     seasonElement.SetAttribute("Watched", "true");
-                    foreach (XmlElement childnode in seasonElement.FirstChild.ChildNodes)
+                    foreach (XmlElement childnode in seasonElement.SelectSingleNode("Episodes").SelectNodes("Episode"))
                     {
                         childnode.SetAttribute("Watched", "true");
                     }
@@ -139,51 +175,55 @@ namespace SerienPlaner
                 else
                 {
                     seasonElement.SetAttribute("Watched", "false");
-                    foreach (XmlElement childnode in seasonElement.FirstChild.ChildNodes)
+                    foreach (XmlElement childnode in seasonElement.SelectSingleNode("Episodes").SelectNodes("Episode"))
                     {
                         childnode.SetAttribute("Watched", "false");
                     }
                 }
             }
 
-            var seriesElement = ((XmlElement) seasonElement?.ParentNode?.ParentNode);
-            var seasonelementlist = new List<XmlNode>(seriesElement?.FirstChild?.ChildNodes.Cast<XmlNode>());
-            if (seasonelementlist.All(x => x.Attributes["Watched"].Value == "true")) seriesElement.SetAttribute("Watched", "true");
-            else seriesElement.SetAttribute("Watched", "false");
+            var seriesElement = (XmlElement) seasonElement?.ParentNode?.ParentNode;
+            if (seriesElement?.FirstChild != null)
+            {
+                var seasonelementlist = new List<XmlNode>(seriesElement.SelectSingleNode("Seasons").ChildNodes.Cast<XmlNode>());
+                seriesElement.SetAttribute("Watched", seasonelementlist.All(x => x.Attributes?["Watched"].Value == "true")
+                                                           ? "true"
+                                                           : "false");
+            }
             //XdataProvider.Refresh();
             XdataProvider.Document.Save("UserData.xml");
         }
 
-        private void OmdbLookup2View(OmdbRequestBuilder builder)
-        {
-            var con = new OmdbConnection();
-            try
-            {
-                var root = con.GetResult(builder);
-                var fullFilePath = root.Poster;
-                var bitmap = new BitmapImage();
-                try
-                {
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-                    bitmap.EndInit();
-                }
-                catch (Exception)
-                {
-                    //Kein Bild gefunden
-                }
-                seriesControl.OmdbResultObj = root;
-                seriesControl.imgPoster.Source = bitmap;
-            }
-            catch (Exception)
-            {
-                // ignored
-            }
-        }
+        //private void OmdbLookup2View(TvDbRequestBuilder builder)
+        //{
+        //    var con = new TvDbConnection();
+        //    try
+        //    {
+        //        TvDbResult root = con.GetResult(builder);
+        //        string fullFilePath = root.Poster;
+        //        var bitmap = new BitmapImage();
+        //        try
+        //        {
+        //            bitmap.BeginInit();
+        //            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+        //            bitmap.EndInit();
+        //        }
+        //        catch (Exception)
+        //        {
+        //            //Kein Bild gefunden
+        //        }
+        //        SeriesControl.TvDbResultObj = root;
+        //        SeriesControl.ImgPoster.Source = bitmap;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // ignored
+        //    }
+        //}
 
         private void OnSeriesAdd(object sender, RoutedEventArgs e)
         {
-            AddItemWindow aiw = new AddItemWindow("Add Series");
+            var aiw = new AddItemWindow("Add Series");
             aiw.ShowDialog();
             _watchHandler.AddWatch(aiw.InputValue);
             _watchHandler.Save();
@@ -192,19 +232,31 @@ namespace SerienPlaner
 
         private void OnSeriesEdit(object sender, RoutedEventArgs e)
         {
-            var seriesElement = (XmlElement) ((MenuItem) e.Source).DataContext;
-            var Id = int.Parse(seriesElement.Attributes["Id"].Value);
-            EditSeries es = new EditSeries(_watchHandler.WatchXml.Series.First(x => x.Id == Id));
-            es.ShowDialog();
-            _watchHandler.Save();
-            XdataProvider.Refresh();
+            //var seriesElement = (XmlElement) ((MenuItem) e.Source).DataContext;
+            //int id = int.Parse(seriesElement.Attributes["Id"].Value);
+            //var es = new EditSeries(_watchHandler.WatchXml.Series.First(x => x.Id == id));
+            //es.ShowDialog();
+            //_watchHandler.Save();
+            //XdataProvider.Refresh();
         }
 
         public void UpdateDataSet()
         {
-            _watchHandler.RefreshWatch();
+            //_watchHandler.RefreshWatch();
             _watchHandler.Save();
             XdataProvider.Refresh();
+        }
+
+        public void SetConnectionState(bool IsConnected)
+        {
+            if (IsConnected)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    lblConState.Foreground = System.Windows.Media.Brushes.Green;
+                    lblConState.Content = "Connected";
+                });
+            }
         }
     }
 }

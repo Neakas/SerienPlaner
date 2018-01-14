@@ -7,8 +7,8 @@
     <ProjectGuid>{DD2C50A5-1AB7-4500-A6D4-3E728AB1F013}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SerienPlaner</RootNamespace>
-    <AssemblyName>SerienPlaner</AssemblyName>
+    <RootNamespace>Watchlist</RootNamespace>
+    <AssemblyName>Watchlist</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -38,6 +38,9 @@
     <Reference Include="MahApps.Metro, Version=1.3.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
@@ -83,13 +86,26 @@
     <Compile Include="Controls\DoubleLabel.xaml.cs">
       <DependentUpon>DoubleLabel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Series.xaml.cs">
-      <DependentUpon>Series.xaml</DependentUpon>
+    <Compile Include="Controls\LoadableImage.xaml.cs">
+      <DependentUpon>LoadableImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchControl.xaml.cs">
+      <DependentUpon>SearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EpisodeControl.xaml.cs">
+      <DependentUpon>EpisodeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShowControl.xaml.cs">
+      <DependentUpon>ShowControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converter\StringToBoolConverter.cs" />
     <Compile Include="Converter\TextBlockForegroundConverter.cs" />
-    <Compile Include="Json\OmdbResult.cs" />
-    <Compile Include="OMDBwrapper\OMDBSuggestionProvider.cs" />
+    <Compile Include="Converter\UnixDate2DT.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Json\TvDbResult.cs" />
+    <Compile Include="TvDbwrapper\JsonClasses\JsonClasses.cs" />
+    <Compile Include="TvDbwrapper\TvDbHelper.cs" />
+    <Compile Include="TvDbwrapper\TvDbSuggestionProvider.cs" />
     <Compile Include="WatchData\Watch.cs" />
     <Compile Include="WatchData\WatchEpisode.cs" />
     <Compile Include="WatchData\WatchHandler.cs" />
@@ -105,7 +121,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\Series.xaml">
+    <Page Include="Controls\LoadableImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SearchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EpisodeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ShowControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,8 +179,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OMDBwrapper\OmdbConnection.cs" />
-    <Compile Include="OMDBwrapper\OMDBRequestBuilder.cs" />
+    <Compile Include="TvDbwrapper\TvDbConnection.cs" />
+    <Compile Include="TvDbwrapper\TvDbRequestBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -192,6 +220,10 @@
     <ProjectReference Include="..\AutoCompleteTextBox-master\dragonz.actb\dragonz.actb.csproj">
       <Project>{89bc47c7-f14d-46c5-8b9b-0db90ce2ac42}</Project>
       <Name>dragonz.actb</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Administrator\Source\Repos\TVDBSharp\TVDBSharp\TVDBSharp\TVDBSharp.csproj">
+      <Project>{0cc493d7-0a9f-4199-9615-0a977945d716}</Project>
+      <Name>TVDBSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

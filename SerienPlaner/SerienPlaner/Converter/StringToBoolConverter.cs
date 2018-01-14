@@ -1,24 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace SerienPlaner
+namespace Watchlist.Converter
 {
     [ValueConversion(typeof(object), typeof(bool))]
     public class StringToBoolConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (string)value == "true";
-        }
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (string)value == "true";
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return ((bool)value == true) ? "true" : "false";
-        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => (bool)value ? "true" : "false";
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using NeaUtils.Extensions.XmlExtensions;
-using SerienPlaner.Json;
+using TVDBSharp.Models;
+using Watchlist.Json;
 
-namespace SerienPlaner.WatchData
+namespace Watchlist.WatchData
 {
     public class WatchHandler
     {
@@ -16,7 +16,7 @@ namespace SerienPlaner.WatchData
         public WatchHandler()
         {
             if (WatchXml != null) return;
-            var appdir = NeaUtils.Application.ApplicationHelper.GetApplicationExecutionDirectory();
+            DirectoryInfo appdir = NeaUtils.Application.ApplicationHelper.GetApplicationExecutionDirectory();
             XmlFile = appdir.EnumerateFiles().FirstOrDefault(x => x.Name == "UserData.xml");
 
             if (XmlFile != null) //Load the Xml Data
@@ -31,58 +31,57 @@ namespace SerienPlaner.WatchData
                 };
                 XmlFile = new FileInfo(Path.Combine(appdir.FullName, "UserData.xml"));
             }
+
+
             UpdateWatch();
         }
 
         private void UpdateWatch()
         {
-            WatchXml.Series.ForEach(x=> x.Update());
+            //WatchXml.Series.ForEach(x=> x.Update());
             WatchXml.SerializeToFile(XmlFile.FullName);
         }
 
-        public void RefreshWatch()
-        {
-            WatchXml.Series.ForEach(x=> x.Refresh());
-        }
+        public void RefreshWatch() => WatchXml.Series.ForEach(x=> x.Refresh());
 
-        public void AddWatch( OmdbResult sender )
+        public void AddWatch( Show show )
         {
-            int totalSeasons;
-            int newId = WatchXml.Series.OrderByDescending(x => x.Id).Select(x=> x.Id).FirstOrDefault();
+            int TotalSeasons = show.Seasons.Max(x => x.SeasonNumber);
+            int newId = WatchXml.Series.OrderByDescending(x => x.Id).Select(x => x.Id).FirstOrDefault();
             newId++;
-            WatchXml.Series.Add(new WatchSeries(sender, !int.TryParse(sender.totalSeasons, out totalSeasons)) {Id = newId});
+            WatchSeries showS = new WatchSeries(show);
+            WatchXml.Series.Add(showS);
             WatchXml.SerializeToFile(XmlFile.FullName);
         }
 
-        public void AddWatch(string Value)
+        public void AddWatch(string value)
         {
-            WatchXml.Series.Add(new WatchSeries(Value));
-            WatchXml.SerializeToFile(XmlFile.FullName);
+            //WatchXml.Series.Add(new WatchSeries(value));
+            //WatchXml.SerializeToFile(XmlFile.FullName);
         }
 
-        public void AddSeasons(string Series,int Amount)
+        public void AddSeasons(string series,int amount)
         {
-            for (int i = 0; i < Amount; i++)
-            {
-                WatchXml.Series.First(x => x.Title == Series).Seasons.Add(new WatchSeason() { SeasonId = i});
-            }
+            //for (var i = 0; i < amount; i++)
+            //{
+            //    WatchXml.Series.First(x => x.Name == series).Seasons.Add(new WatchSeason
+            //    { SeasonId = i});
+            //}
         }
 
-        public void AddEpisodes(string Series, int SeasonId,int Amount)
+        public void AddEpisodes(string series, int seasonId,int amount)
         {
-            for (int i = 0; i < Amount; i++)
-            {
-                WatchXml.Series.First(x => x.Title == Series).Seasons.First(x=> x.SeasonId == SeasonId).Episodes.Add(new WatchEpisode() {EpisodeId = i,EpisodeName = "Episode " + i,Imdbid = "Manuell"});
-            }
+            //for (var i = 0; i < amount; i++)
+            //{
+            //    WatchXml.Series.First(x => x.Title == series).Seasons.First(x=> x.SeasonId == seasonId).Episodes.Add(new WatchEpisode
+            //    {EpisodeId = i,EpisodeName = "Episode " + i,Imdbid = "Manuell"});
+            //}
         }
-        public void Save()
-        {
-            WatchXml.SerializeToFile(XmlFile.FullName);
-        }
+        public void Save() => WatchXml.SerializeToFile(XmlFile.FullName);
 
         public void RemoveWatch(string imdbid)
         {
-            var delseries = WatchXml.Series.First(x => x.Imdbid == imdbid);
+            WatchSeries delseries = WatchXml.Series.First(x => x.Imdbid == imdbid);
             WatchXml.Series.Remove(delseries);
             WatchXml.SerializeToFile(XmlFile.FullName);
         }

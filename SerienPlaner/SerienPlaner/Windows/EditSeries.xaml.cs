@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using SerienPlaner.WatchData;
+using Watchlist.WatchData;
 
-namespace SerienPlaner.Windows
+namespace Watchlist.Windows
 {
     /// <summary>
     /// Interaction logic for EditSeries.xaml
@@ -26,126 +15,121 @@ namespace SerienPlaner.Windows
         {
             Series = series;
             InitializeComponent();
-            lbSeasons.SelectionChanged += delegate
+            LbSeasons.SelectionChanged += delegate
             {
-                btRemoveSeason.IsEnabled = btAddEpisodes.IsEnabled = lbSeasons.SelectedItem != null;
-                btAutoFill.IsEnabled = lbSeasons.SelectedItem != null;
+                BtRemoveSeason.IsEnabled = btAddEpisodes.IsEnabled = LbSeasons.SelectedItem != null;
+                btAutoFill.IsEnabled = LbSeasons.SelectedItem != null;
             };
-            lbEpisodes.SelectionChanged += delegate
+            LbEpisodes.SelectionChanged += delegate
             {
-                btRemoveEpisodes.IsEnabled = lbEpisodes.SelectedItem != null && ((WatchEpisode)lbEpisodes.SelectedItem)?.Imdbid == null;
-                btUp.IsEnabled = lbEpisodes.SelectedItem != null && ((WatchEpisode)lbEpisodes.SelectedItem).Imdbid == null;
-                btDown.IsEnabled = lbEpisodes.SelectedItem != null && ((WatchEpisode)lbEpisodes.SelectedItem).Imdbid == null;
+                btRemoveEpisodes.IsEnabled = (LbEpisodes.SelectedItem != null) && (((WatchEpisode)LbEpisodes.SelectedItem)?.Imdbid == null);
+                btUp.IsEnabled = (LbEpisodes.SelectedItem != null) && (((WatchEpisode)LbEpisodes.SelectedItem).Imdbid == null);
+                btDown.IsEnabled = (LbEpisodes.SelectedItem != null) && (((WatchEpisode)LbEpisodes.SelectedItem).Imdbid == null);
             };
         }
 
-        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ((UIElement) sender).IsManipulationEnabled = true;
-        }
+        private void Control_OnMouseDoubleClick(object sender, MouseButtonEventArgs e) => ((UIElement) sender).IsManipulationEnabled = true;
 
         private void BtAddSeason_OnClick(object sender, RoutedEventArgs e)
         {
-            int id = Series.Seasons.LastOrDefault()?.SeasonId + 1 ?? 1;
-            Series.Seasons.Add(new WatchSeason() {SeasonId = id});
+            //int id = Series.Seasons.LastOrDefault()?.SeasonId + 1 ?? 1;
+            //Series.Seasons.Add(new WatchSeason
+            //{SeasonId = id});
         }
 
         private void BtAddEpisodes_OnClick(object sender, RoutedEventArgs e)
         {
-            //AddEpisode()
-            int id = ((WatchSeason)lbSeasons.SelectedItem).Episodes.LastOrDefault()?.EpisodeId + 1 ?? 1;
-            Series.Seasons[Series.Seasons.IndexOf((WatchSeason)lbSeasons.SelectedItem)].Episodes.Add(new WatchEpisode() { EpisodeId = id, EpisodeName = "Episode " + id });
-            lbEpisodes.Items.Refresh();
+            //int id = ((WatchSeason)LbSeasons.SelectedItem).Episodes.LastOrDefault()?.EpisodeId + 1 ?? 1;
+            //Series.Seasons[Series.Seasons.IndexOf((WatchSeason)LbSeasons.SelectedItem)].Episodes.Add(new WatchEpisode
+            //{ EpisodeId = id, EpisodeName = "Episode " + id });
+            //LbEpisodes.Items.Refresh();
         }
-        private void btRemoveEpisodes_Click(object sender, RoutedEventArgs e)
-        {
-            Series.Seasons[Series.Seasons.IndexOf((WatchSeason) lbSeasons.SelectedItem)].Episodes.Remove(
-                (WatchEpisode) lbEpisodes.SelectedItem);
-        }
+        //private void btRemoveEpisodes_Click(object sender, RoutedEventArgs e) => Series.Seasons[Series.Seasons.IndexOf((WatchSeason) LbSeasons.SelectedItem)].Episodes.Remove(
+        //    (WatchEpisode) LbEpisodes.SelectedItem);
 
         private void BtUp_OnClick(object sender, RoutedEventArgs e)
         {
-            WatchEpisode selectedEpisode = ((WatchEpisode)lbEpisodes.SelectedItem);
-            WatchSeason selectedSeason = ((WatchSeason) lbSeasons.SelectedItem);
+            var selectedEpisode = (WatchEpisode)LbEpisodes.SelectedItem;
+            var selectedSeason = (WatchSeason) LbSeasons.SelectedItem;
             Move(selectedEpisode, selectedSeason,true);
-            lbEpisodes.Items.Refresh();
-            lbEpisodes.SelectedItem = selectedEpisode;
+            LbEpisodes.Items.Refresh();
+            LbEpisodes.SelectedItem = selectedEpisode;
         }
 
-        private void Move(WatchEpisode selectedEpisode,WatchSeason selectedSeason, bool MoveUp)
+        private static void Move(WatchEpisode selectedEpisode,WatchSeason selectedSeason, bool moveUp)
         {
-            int StartIndex = selectedSeason.Episodes.IndexOf(selectedEpisode);
-            int NewIndex = StartIndex;
-            if(MoveUp) if (StartIndex == 0) return;
-            if(!MoveUp) if (StartIndex == selectedSeason.Episodes.Count - 1) return;
-            int Id = selectedEpisode.EpisodeId;
-            bool validId = false;
+            int startIndex = selectedSeason.Episodes.IndexOf(selectedEpisode);
+            int newIndex = startIndex;
+            if(moveUp) if (startIndex == 0) return;
+            if(!moveUp) if (startIndex == selectedSeason.Episodes.Count - 1) return;
+            int id = selectedEpisode.EpisodeId;
+            var validId = false;
 
             while (!validId)
             {
-                if (MoveUp)
+                if (moveUp)
                 {
-                    Id--;
-                    if (!selectedSeason.Episodes.Any(x => x.EpisodeId == Id))
+                    id--;
+                    if (selectedSeason.Episodes.All(x => x.EpisodeId != id))
                     {
                         validId = true;
                         continue;
                     }
-                    NewIndex--;
+                    newIndex--;
                 }
                 else
                 {
-                    Id++;
-                    //selectedSeason.Episodes.Move(Index, Index + 1);
-                    if (!selectedSeason.Episodes.Any(x => x.EpisodeId == Id))
+                    id++;
+                    if (selectedSeason.Episodes.All(x => x.EpisodeId != id))
                     {
                         validId = true;
                         continue;
                     }
-                    NewIndex++;
+                    newIndex++;
                 }
             }
-            selectedSeason.Episodes.Move(StartIndex, NewIndex);
-            selectedEpisode.EpisodeId = Id;
+            selectedSeason.Episodes.Move(startIndex, newIndex);
+            selectedEpisode.EpisodeId = id;
         }
 
         private void btDown_Click(object sender, RoutedEventArgs e)
         {
-            WatchEpisode selectedEpisode = ((WatchEpisode)lbEpisodes.SelectedItem);
-            WatchSeason selectedSeason = ((WatchSeason)lbSeasons.SelectedItem);
+            var selectedEpisode = (WatchEpisode)LbEpisodes.SelectedItem;
+            var selectedSeason = (WatchSeason)LbSeasons.SelectedItem;
             Move(selectedEpisode,selectedSeason,false);
-            lbEpisodes.Items.Refresh();
-            lbEpisodes.SelectedItem = selectedEpisode;
+            LbEpisodes.Items.Refresh();
+            LbEpisodes.SelectedItem = selectedEpisode;
         }
 
-        private void AddEpisode(int id)
-        {
-            Series.Seasons[Series.Seasons.IndexOf((WatchSeason)lbSeasons.SelectedItem)].Episodes.Add(new WatchEpisode() { EpisodeId = id, EpisodeName = "Episode " + id });
-        }
+        //private void AddEpisode(int id) => Series.Seasons[Series.Seasons.IndexOf((WatchSeason)LbSeasons.SelectedItem)].Episodes.Add(new WatchEpisode
+        //{ EpisodeId = id, EpisodeName = "Episode " + id });
 
 
         private void BtAutoFill_OnClick(object sender, RoutedEventArgs e)
         {
-            WatchSeason selectedSeason = ((WatchSeason) lbSeasons.SelectedItem);
-            int startid = 1;
-            int Count = 0;
-            int maxid = ((WatchSeason) lbSeasons.SelectedItem).Episodes.Last().EpisodeId;
+            var selectedSeason = (WatchSeason) LbSeasons.SelectedItem;
+            const int startid = 1;
+            var count = 0;
+            int maxid = ((WatchSeason) LbSeasons.SelectedItem).Episodes.Last().EpisodeId;
             for (int i = startid; i < maxid; i++)
             {
-                if (!selectedSeason.Episodes.Any(x => x.EpisodeId == i))
-                {
-                    AddEpisode(i);
-                    Count++;
-                }
+                if (selectedSeason.Episodes.Any(x => x.EpisodeId == i)) continue;
+                //AddEpisode(i);
+                count++;
             }
-            MessageBox.Show(Count + " Episodes have been Auto-Created.");
+            MessageBox.Show(count + " Episodes have been Auto-Created.");
             MainWindow.CurrentInstance.UpdateDataSet();
             Series.Refresh();
-            lbSeasons.Items.Refresh();
-            lbEpisodes.Items.Refresh();
-            var season = (WatchSeason) lbSeasons.SelectedItem;
-            lbSeasons.SelectedItem = null;
-            lbSeasons.SelectedItem = season;
+            LbSeasons.Items.Refresh();
+            LbEpisodes.Items.Refresh();
+            var season = (WatchSeason) LbSeasons.SelectedItem;
+            LbSeasons.SelectedItem = null;
+            LbSeasons.SelectedItem = season;
+        }
+
+        private void btRemoveEpisodes_Click(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

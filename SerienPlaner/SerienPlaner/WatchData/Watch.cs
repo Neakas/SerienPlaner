@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Xml.Serialization;
+using TVDBSharp.Models;
 
-namespace SerienPlaner.WatchData
+namespace Watchlist.WatchData
 {
     [XmlRoot(ElementName = "Watch")]
     public class Watch
